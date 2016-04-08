@@ -16,6 +16,7 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0",
+        "yiisoft/yii2-authclient": "~2.0",
         "jarrus90/yii2-core": "@dev",
         "jarrus90/yii2-core-admin": "@dev"
     },

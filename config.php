@@ -46,4 +46,12 @@ return [
             ],
         ]
     ],
+    'params' => [
+        'adminEmail' => 'admin@example.com',
+        'supportEmail' => 'support@example.com',
+        'user.passwordResetTokenExpire' => 3600,
+        'yii.migrations' => [
+            '@vendor/jarrus90/yii2-user/migrations/'
+        ]
+    ],
 ];
