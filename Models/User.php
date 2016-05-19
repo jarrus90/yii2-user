@@ -7,8 +7,8 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use app\modules\User\Helpers\Password;
-use app\modules\User\Helpers\Mailer;
+use jarrus90\User\Helpers\Password;
+use jarrus90\User\Helpers\Mailer;
 
 /**
  * User model
@@ -30,9 +30,6 @@ class User extends ActiveRecord implements IdentityInterface {
     const STATUS_ACTIVE = 10;
     const GENDER_MALE = 1;
     const GENDER_FEMALE = 0;
-    const ACCOUNT_TYPE_CLIENT = 'user_client';
-    const ACCOUNT_TYPE_DOCTOR = 'user_doctor';
-    const ACCOUNT_TYPE_CLINIC = 'user_clinic';
 
     /** @var string Plain password. Used for model validation. */
     public $password;
@@ -255,7 +252,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     public function getAccounts() {
         $connected = [];
-        $accounts = $this->hasMany(\app\modules\User\Models\Account::className(), ['user_id' => 'id'])->all();
+        $accounts = $this->hasMany(\jarrus90\User\Models\Account::className(), ['user_id' => 'id'])->all();
 
         /** @var Account $account */
         foreach ($accounts as $account) {

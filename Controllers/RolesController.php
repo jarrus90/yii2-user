@@ -5,7 +5,6 @@
  *
  * AdminCommentController
  * 
- * @package app\modules\Blog\Controllers
  */
 
 namespace jarrus90\User\Controllers;
