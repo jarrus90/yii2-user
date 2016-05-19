@@ -1,6 +1,6 @@
 <?php
 
-namespace jarrus90\User\Frontend\Controllers;
+namespace jarrus90\User\Controllers;
 
 class RegistrationController extends \yii\web\Controller {
     

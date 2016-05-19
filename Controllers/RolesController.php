@@ -8,7 +8,7 @@
  * @package app\modules\Blog\Controllers
  */
 
-namespace jarrus90\User\Admin\Controllers;
+namespace jarrus90\User\Controllers;
 
 class RolesController extends \jarrus90\CoreAdmin\Controllers\AdminController {
 

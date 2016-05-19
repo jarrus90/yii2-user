@@ -8,9 +8,9 @@
  * @package jarrus90\User\Controllers
  */
 
-namespace jarrus90\User\Admin\Controllers;
+namespace jarrus90\User\Controllers;
 
-class UsersController extends \jarrus90\CoreAdmin\Controllers\AdminController {
+class AdminController extends \jarrus90\Core\Web\Controllers\AdminController {
 
     public function actionList() {
         return $this->render('list');

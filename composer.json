@@ -17,8 +17,7 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0",
         "yiisoft/yii2-authclient": "~2.0",
-        "jarrus90/yii2-core": "*",
-        "jarrus90/yii2-core-admin": "*"
+        "jarrus90/yii2-core": "*"
     },
     "autoload": {
         "psr-4": {
