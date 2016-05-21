@@ -17,10 +17,6 @@ use yii\web\GroupUrlRule;
  */
 class Bootstrap implements BootstrapInterface {
 
-    protected $_controllerMap = [
-        'admin' => 'jarrus90\User\Controllers\AdminController',
-        'auth' => 'jarrus90\User\Controllers\AuthController',
-    ];
     /** @inheritdoc */
     public function bootstrap($app) {
         /** @var Module $module */
@@ -34,7 +30,7 @@ class Bootstrap implements BootstrapInterface {
                     'loginUrl' => '/user/security/login',
                     'identityClass' => $module->identityClass,
                 ]);
-                $module->controllerMap = array_merge($this->_controllerMap, $module->controllerMap);
+                $module->controllerMap = array_merge($module->_controllerMap, $module->controllerMap);
                 $app->urlManager->addRules([new GroupUrlRule([
                     'prefix' => $module->adminUrlPrefix,
                     'rules' => $module->adminUrlRules,

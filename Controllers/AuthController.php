@@ -2,12 +2,18 @@
 
 namespace jarrus90\User\Controllers;
 
+use Yii;
 class AuthController extends \jarrus90\Core\Web\Controllers\FrontController {
     
     use \jarrus90\Core\Traits\AjaxValidationTrait;
     
+    public function actionLogout() {
+        Yii::$app->user->logout();
+        return $this->goHome();
+    }
+    
     public function actionLogin(){
-        $this->view->title = Yii::t('user', 'Logg in');
+        $this->view->title = Yii::t('user', 'Log in');
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -23,17 +29,35 @@ class AuthController extends \jarrus90\Core\Web\Controllers\FrontController {
             }
             return $this->goBack(Yii::$app->request->referrer);
         }
-        $formView = $this->renderPartial('@app/modules/User/views/auth/login', [
+        $formView = $this->renderPartial('@jarrus90/User/views/auth/login', [
             'model' => $loginForm,
             'module' => $this->module
         ]);
         if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('@app/modules/User/views/form-popup', [
+            return $this->renderAjax('@jarrus90/User/views/form-popup', [
                         'content' => $formView
             ]);
         }
-        return $this->render('@app/modules/User/views/form-inline', [
+        return $this->render('@jarrus90/User/views/form-inline', [
                     'content' => $formView
         ]);
+    }
+    
+    public function actionRegister() {
+        $this->view->title = Yii::t('user', 'Signup');
+        $model = new \jarrus90\User\Forms\RegistrationForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+        return $this->render('@jarrus90/User/views/auth/registration', [ 'registrationForm' => $model]);
+        
+    }
+    public function actionResend() {
+        
+        
     }
 }

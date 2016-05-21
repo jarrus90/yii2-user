@@ -4,12 +4,12 @@
  * m151001_114158_create_locations_tables
  *
  */
-use app\migrations\BaseMigration;
-use app\modules\User\Models\User;
-use app\modules\User\Models\Token;
-use app\modules\User\Models\Account;
-use app\modules\Locations\Models\CityModel;
-use app\modules\Locations\Models\CountryModel;
+use jarrus90\Core\Console\BaseMigration;
+use jarrus90\User\Models\User;
+use jarrus90\User\Models\Token;
+use jarrus90\User\Models\Account;
+use jarrus90\Locations\Models\CityModel;
+use jarrus90\Locations\Models\CountryModel;
 
 /**
  * Migration to set up users tables
@@ -45,9 +45,6 @@ class m151001_114227_create_users_tables extends BaseMigration {
             'surname' => $this->string(255),
             'dob' => $this->date(),
             'salutation' => $this->string(255),
-            'timezone' => $this->string(255),
-            'country_id' => $this->integer(),
-            'city_id' => $this->integer(),
             'description' => $this->text(),
             'avatar' => $this->string(255),
             'logo' => $this->string(255),
@@ -61,12 +58,7 @@ class m151001_114227_create_users_tables extends BaseMigration {
             'fax' => $this->string(255),
                 ], $tableOptions);
 
-        $this->createIndex('idx-user_country_id', User::tableName(), 'country_id');
-        $this->createIndex('idx-user_city_id', User::tableName(), 'city_id');
-
         $this->addForeignKey('fk-user_blocked_by', User::tableName(), 'blocked_by', User::tableName(), 'id', 'CASCADE', 'RESTRICT');
-        $this->addForeignKey('fk-user_country_id', User::tableName(), 'country_id', CountryModel::tableName(), 'id', 'CASCADE', 'RESTRICT');
-        $this->addForeignKey('fk-user_city_id', User::tableName(), 'city_id', CityModel::tableName(), 'id', 'CASCADE', 'RESTRICT');
 
         $this->createTable(Account::tableName(), [
             'id' => $this->primaryKey(),
