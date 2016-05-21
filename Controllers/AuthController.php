@@ -8,15 +8,17 @@ class AuthController extends \jarrus90\Core\Web\Controllers\FrontController {
     use \jarrus90\Core\Traits\AjaxValidationTrait;
     
     public function actionLogout() {
-        Yii::$app->user->logout();
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+        }
         return $this->goHome();
     }
     
     public function actionLogin(){
-        $this->view->title = Yii::t('user', 'Log in');
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        $this->view->title = Yii::t('user', 'Log in');
         $loginForm = new \jarrus90\User\Forms\LoginForm();
         $this->performAjaxValidation($loginForm);
         if ($loginForm->load(Yii::$app->request->post()) && $loginForm->login()) {
@@ -44,6 +46,9 @@ class AuthController extends \jarrus90\Core\Web\Controllers\FrontController {
     }
     
     public function actionRegister() {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
         $this->view->title = Yii::t('user', 'Signup');
         $model = new \jarrus90\User\Forms\RegistrationForm();
         if ($model->load(Yii::$app->request->post())) {

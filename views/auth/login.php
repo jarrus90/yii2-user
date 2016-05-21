@@ -6,8 +6,8 @@ use yii\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var app\modules\User\Models\LoginForm $model
- * @var app\modules\User\Module $module
+ * @var jarrus90\User\Models\LoginForm $model
+ * @var jarrus90\User\Module $module
  */
 $this->title = Yii::t('user', 'Sign in');
 $this->params['breadcrumbs'][] = $this->title;

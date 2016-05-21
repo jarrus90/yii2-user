@@ -109,9 +109,6 @@ class User extends ActiveRecord implements IdentityInterface {
             'userSafe' => [['name', 'surname'], 'safe'],
             'dobFormat' => ['dob', 'date', 'format' => 'php:Y-m-d'],
             'locationInt' => [['country_id', 'city_id'], 'integer'],
-            'langExists' => ['lang', 'exist', 'targetClass' => Language::className(), 'targetAttribute' => 'code'],
-            'cityExists' => ['city_id', 'exist', 'targetClass' => CityModel::className(), 'targetAttribute' => 'id'],
-            'countryExists' => ['country_id', 'exist', 'targetClass' => CountryModel::className(), 'targetAttribute' => 'id'],
             'genderRange' => ['gender', 'in', 'range' => [User::GENDER_MALE, User::GENDER_FEMALE]],
             'salutationLength' => ['salutation', 'string', 'max' => 10],
             'salutationTrim' => ['salutation', 'trim'],
@@ -303,10 +300,11 @@ class User extends ActiveRecord implements IdentityInterface {
             $token = Yii::createObject(['class' => Token::className(), 'type' => Token::TYPE_CONFIRMATION]);
             $token->link('user', $this);
         }
-        $mailer = new Mailer();
-        $mailer->sendWelcomeMessage($this, isset($token) ? $token : null);
-
-        Yii::$app->trigger(EventUser::EVENT_NEW_USER, new EventUser(['user' => $this]));
+        if (Yii::$app->getModule('user')->enableWelcome) {
+            $mailer = new Mailer();
+            $mailer->sendWelcomeMessage($this, isset($token) ? $token : null);
+        }
+        //Yii::$app->trigger(EventUser::EVENT_NEW_USER, new EventUser(['user' => $this]));
 
         return true;
     }

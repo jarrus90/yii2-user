@@ -54,9 +54,10 @@ class RegistrationForm extends \jarrus90\Core\Models\Model {
             $user->email = $this->email;
             $user->name = $this->name;
             $user->surname = $this->surname;
+            $user->password = $this->password;
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            if ($user->save()) {
+            if ($user->register()) {
                 return $user;
             }
         }

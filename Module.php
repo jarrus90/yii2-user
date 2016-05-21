@@ -4,6 +4,7 @@ namespace jarrus90\User;
 
 class Module extends \yii\base\Module {
 
+    public $enableWelcome = true;
     /** @var bool Whether user can register. */
     public $enableRegistration = true;
 
