@@ -31,6 +31,7 @@ class Module extends \yii\base\Module {
         'auth' => 'jarrus90\User\Controllers\AuthController',
         'registration' => 'jarrus90\User\Controllers\RegistrationController',
         'recovery' => 'jarrus90\User\Controllers\RecoveryController',
+        'panel' => 'jarrus90\User\Controllers\PanelController',
     ];
     
     /** @var int Cost parameter used by the Blowfish hash algorithm. */
@@ -44,6 +45,10 @@ class Module extends \yii\base\Module {
     ];
     public $frontUrlPrefix = 'user';
     public $frontUrlRules = [
+        
+        'panel' => 'panel/index',
+        'panel/<action:(private)>' => 'panel/<action>',
+        
         '<action:(login|logout|register|resend)>' => 'auth/<action>',
         'confirm/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'registration/confirm',
         'forgot' => 'recovery/request',

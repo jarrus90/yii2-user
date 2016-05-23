@@ -80,11 +80,6 @@ class SettingsForm extends \jarrus90\Core\Models\Model {
         ];
     }
 
-    public function validateCity($attribute) {
-        if(!CityModel::findOne(['id' => $this->city_id, 'country_id' => $this->country_id])) {
-            $this->addError($attribute, Yii::t('user', 'Selected city is not in selected country'));
-        }
-    }
     /**
      * Attribute labels
      * @return array

@@ -9,8 +9,6 @@ use yii\widgets\ActiveForm;
  * @var jarrus90\User\Models\LoginForm $model
  * @var jarrus90\User\Module $module
  */
-$this->title = Yii::t('user', 'Sign in');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="panel panel-default">
     <div class="panel-heading">

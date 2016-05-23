@@ -71,7 +71,7 @@ class User extends ActiveRecord implements IdentityInterface {
     public function scenarios() {
         return [
             'connect' => ['email'],
-            'settings' => ['name', 'surname', 'phone', 'country_id', 'city_id', 'dob', 'gender', 'salutation', 'timezone'],
+            'settings' => ['name', 'surname', 'phone', 'dob', 'gender', 'salutation'],
             'register' => ['email', 'password', 'phone'],
             'privateSettings' => ['email', 'password'],
             'languageSettings' => ['lang'],
@@ -108,7 +108,6 @@ class User extends ActiveRecord implements IdentityInterface {
             'blockedReason' => ['blocked_reason', 'safe'],
             'userSafe' => [['name', 'surname'], 'safe'],
             'dobFormat' => ['dob', 'date', 'format' => 'php:Y-m-d'],
-            'locationInt' => [['country_id', 'city_id'], 'integer'],
             'genderRange' => ['gender', 'in', 'range' => [User::GENDER_MALE, User::GENDER_FEMALE]],
             'salutationLength' => ['salutation', 'string', 'max' => 10],
             'salutationTrim' => ['salutation', 'trim'],

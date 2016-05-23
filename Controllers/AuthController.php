@@ -41,7 +41,8 @@ class AuthController extends \jarrus90\Core\Web\Controllers\FrontController {
             ]);
         }
         return $this->render('@jarrus90/User/views/form-inline', [
-                    'content' => $formView
+                    'content' => $formView,
+                    'title' => Yii::t('user', 'Sign in')
         ]);
     }
     

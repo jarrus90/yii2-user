@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+$this->title = $title;
 ?>
 <div class="col-lg-6 col-lg-offset-3">
     <?php $formRegistration = ActiveForm::begin(['id' => 'registration-form']); ?>
