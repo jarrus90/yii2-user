@@ -5,11 +5,7 @@
  *
  */
 use jarrus90\Core\Console\BaseMigration;
-use jarrus90\User\Models\User;
-use jarrus90\User\Models\Token;
-use jarrus90\User\Models\Account;
-use jarrus90\Locations\Models\CityModel;
-use jarrus90\Locations\Models\CountryModel;
+use jarrus90\User\models\User;
 
 /**
  * Migration to set up users tables
@@ -27,60 +23,7 @@ class m151001_114227_create_users_tables extends BaseMigration {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-
-        $this->createTable(User::tableName(), [
-            'id' => $this->primaryKey(),
-            'email' => $this->string(255)->notNull(),
-            'password_hash' => $this->string(255)->notNull(),
-            'auth_key' => $this->string(255)->notNull(),
-            'confirmed_at' => $this->integer(),
-            'unconfirmed_email' => $this->string(255),
-            'registration_ip' => $this->string(255),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
-            'flags' => $this->integer()->notNull()->defaultValue('0'),
-            'phone' => $this->string(255),
-            'lang' => $this->string(255),
-            'name' => $this->string(255)->notNull(),
-            'surname' => $this->string(255),
-            'dob' => $this->date(),
-            'salutation' => $this->string(255),
-            'description' => $this->text(),
-            'avatar' => $this->string(255),
-            'logo' => $this->string(255),
-            'gender' => 'INT2 NULL',
-            'blocked_at' => $this->integer(),
-            'blocked_by' => $this->integer(),
-            'blocked_reason' => $this->string(255),
-            'adress_street' => $this->string(255),
-            'adress_house' => $this->string(255),
-            'adress_zip' => $this->string(255),
-            'fax' => $this->string(255),
-                ], $tableOptions);
-
-        $this->addForeignKey('fk-user_blocked_by', User::tableName(), 'blocked_by', User::tableName(), 'id', 'CASCADE', 'RESTRICT');
-
-        $this->createTable(Account::tableName(), [
-            'id' => $this->primaryKey(),
-            'user_id' => $this->integer(),
-            'provider' => $this->string(255)->notNull(),
-            'client_id' => $this->string(255)->notNull(),
-            'data' => $this->text()->notNull(),
-                ], $tableOptions);
-
-        $this->createIndex('idx-user_account_user_id', Account::tableName(), 'user_id');
-        $this->addForeignKey('fk-user_account_user_id', Account::tableName(), 'user_id', User::tableName(), 'id', 'CASCADE', 'RESTRICT');
-
-        $this->createTable(Token::tableName(), [
-            'user_id' => $this->integer()->notNull(),
-            'code' => $this->string(255)->notNull(),
-            'created_at' => $this->integer()->notNull(),
-            'type' => $this->integer()->notNull(),
-                ], $tableOptions);
-
-        $this->createIndex('idx-user_token_user_id', Token::tableName(), 'user_id');
-        $this->addForeignKey('fk-user_token_user_id', Token::tableName(), 'user_id', User::tableName(), 'id', 'CASCADE', 'RESTRICT');
-
+        
         $this->createTable($this->authManager->ruleTable, [
             'name' => $this->string(64)->notNull(),
             'data' => $this->text(),
@@ -133,9 +76,6 @@ class m151001_114227_create_users_tables extends BaseMigration {
         $this->dropTable($this->authManager->itemChildTable);
         $this->dropTable($this->authManager->itemTable);
         $this->dropTable($this->authManager->ruleTable);
-        $this->dropTable(Token::tableName());
-        $this->dropTable(Account::tableName());
-        $this->dropTable(User::tableName());
     }
 
 }
