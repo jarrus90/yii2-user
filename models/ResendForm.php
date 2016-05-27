@@ -11,7 +11,7 @@
 
 namespace jarrus90\User\models;
 
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\Mailer;
 use jarrus90\User\traits\ModuleTrait;
 use Yii;
@@ -38,15 +38,15 @@ class ResendForm extends Model {
     /** @var Mailer */
     protected $mailer;
 
-    /** @var Finder */
+    /** @var UserFinder */
     protected $finder;
 
     /**
      * @param Mailer $mailer
-     * @param Finder $finder
+     * @param UserFinder $finder
      * @param array  $config
      */
-    public function __construct(Mailer $mailer, Finder $finder, $config = []) {
+    public function __construct(Mailer $mailer, UserFinder $finder, $config = []) {
         $this->mailer = $mailer;
         $this->finder = $finder;
         parent::__construct($config);

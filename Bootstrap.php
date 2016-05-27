@@ -57,7 +57,7 @@ class Bootstrap implements BootstrapInterface {
                     });
                 }
             }
-            Yii::$container->setSingleton(Finder::className(), [
+            Yii::$container->setSingleton(UserFinder::className(), [
                 'userQuery' => Yii::$container->get('UserQuery'),
                 'profileQuery' => Yii::$container->get('ProfileQuery'),
                 'tokenQuery' => Yii::$container->get('TokenQuery'),

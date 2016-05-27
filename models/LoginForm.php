@@ -11,7 +11,7 @@
 
 namespace jarrus90\User\models;
 
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\helpers\Password;
 use Yii;
 use yii\base\Model;
@@ -39,14 +39,14 @@ class LoginForm extends Model {
     /** @var \jarrus90\User\models\User */
     protected $user;
 
-    /** @var Finder */
+    /** @var UserFinder */
     protected $finder;
 
     /**
-     * @param Finder $finder
+     * @param UserFinder $finder
      * @param array  $config
      */
-    public function __construct(Finder $finder, $config = []) {
+    public function __construct(UserFinder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($config);
     }

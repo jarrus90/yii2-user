@@ -11,7 +11,7 @@
 
 namespace jarrus90\User\models;
 
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\helpers\Password;
 use jarrus90\User\Mailer;
 use jarrus90\User\Module;
@@ -51,7 +51,7 @@ use yii\helpers\ArrayHelper;
  * @property Profile   $profile
  *
  * Dependencies:
- * @property-read Finder $finder
+ * @property-read UserFinder $finder
  * @property-read Module $module
  * @property-read Mailer $mailer
  *
@@ -79,11 +79,11 @@ class User extends ActiveRecord implements IdentityInterface {
     public static $usernameRegexp = '/^[-a-zA-Z0-9_\.@]+$/';
 
     /**
-     * @return Finder
+     * @return UserFinder
      * @throws \yii\base\InvalidConfigException
      */
-    protected function getFinder() {
-        return Yii::$container->get(Finder::className());
+    protected function getUserFinder() {
+        return Yii::$container->get(UserFinder::className());
     }
 
     /**

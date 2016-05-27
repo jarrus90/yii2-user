@@ -12,7 +12,7 @@
 namespace jarrus90\User\models;
 
 use jarrus90\User\clients\ClientInterface;
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\models\query\AccountQuery;
 use jarrus90\User\traits\ModuleTrait;
 use yii\authclient\ClientInterface as BaseClientInterface;
@@ -40,7 +40,7 @@ class Account extends ActiveRecord {
 
     use ModuleTrait;
 
-    /** @var Finder */
+    /** @var UserFinder */
     protected static $finder;
 
     /** @var */
@@ -159,7 +159,7 @@ class Account extends ActiveRecord {
      * @throws \yii\base\InvalidConfigException
      */
     protected static function fetchAccount(BaseClientInterface $client) {
-        $account = static::getFinder()->findAccount()->byClient($client)->one();
+        $account = static::getUserFinder()->findAccount()->byClient($client)->one();
 
         if (null === $account) {
             $account = \Yii::createObject([
@@ -182,7 +182,7 @@ class Account extends ActiveRecord {
      * @return User|bool False when can't create user.
      */
     protected static function fetchUser(Account $account) {
-        $user = static::getFinder()->findUserByEmail($account->email);
+        $user = static::getUserFinder()->findUserByEmail($account->email);
 
         if (null !== $user) {
             return $user;
@@ -207,11 +207,11 @@ class Account extends ActiveRecord {
     }
 
     /**
-     * @return Finder
+     * @return UserFinder
      */
-    protected static function getFinder() {
+    protected static function getUserFinder() {
         if (static::$finder === null) {
-            static::$finder = \Yii::$container->get(Finder::className());
+            static::$finder = \Yii::$container->get(UserFinder::className());
         }
 
         return static::$finder;

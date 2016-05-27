@@ -4,7 +4,7 @@ namespace dektrium\user\tests;
 
 use AspectMock\Test as test;
 use Codeception\Specify;
-use dektrium\user\Finder;
+use dektrium\user\UserFinder;
 use dektrium\user\Mailer;
 use dektrium\user\models\RecoveryForm;
 use dektrium\user\models\Token;
@@ -56,7 +56,7 @@ class RecoveryFormTest extends TestCase {
         $this->specify('form is not valid when user is not confirmed', function () use ($form) {
             $user = \Yii::createObject(User::className());
             test::double($user, ['getIsConfirmed' => false]);
-            test::double(Finder::className(), ['findUserByEmail' => $user]);
+            test::double(UserFinder::className(), ['findUserByEmail' => $user]);
             $form->setAttributes(['email' => 'foobar@example.com']);
             verify($form->validate())->false();
             verify($form->getErrors('email'))->contains('You need to confirm your email address');
@@ -68,7 +68,7 @@ class RecoveryFormTest extends TestCase {
             test::double($form, ['validate' => true]);
             $token = test::double(Token::className(), ['save' => true]);
             $user = \Yii::createObject(['class' => User::className(), 'id' => 1]);
-            test::double(Finder::className(), ['findUserByEmail' => $user]);
+            test::double(UserFinder::className(), ['findUserByEmail' => $user]);
             verify($form->sendRecoveryMessage())->true();
             $token->verifyInvoked('save');
             verify(\Yii::$app->session->getFlash('info'))

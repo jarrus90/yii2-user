@@ -11,7 +11,7 @@
 
 namespace jarrus90\User\Controllers;
 
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\models\Account;
 use jarrus90\User\models\LoginForm;
 use jarrus90\User\models\User;
@@ -88,16 +88,16 @@ use EventTrait;
      */
     const EVENT_AFTER_CONNECT = 'afterConnect';
 
-    /** @var Finder */
+    /** @var UserFinder */
     protected $finder;
 
     /**
      * @param string $id
      * @param Module $module
-     * @param Finder $finder
+     * @param UserFinder $finder
      * @param array  $config
      */
-    public function __construct($id, $module, Finder $finder, $config = []) {
+    public function __construct($id, $module, UserFinder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }

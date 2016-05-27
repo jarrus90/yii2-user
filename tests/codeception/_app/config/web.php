@@ -15,7 +15,7 @@ $config = [
     ],
     'modules' => [
         'user' => [
-            'class' => 'dektrium\user\Module',
+            'class' => 'jarrus90\User\Module',
             'admins' => ['user'],
         ],
     ],

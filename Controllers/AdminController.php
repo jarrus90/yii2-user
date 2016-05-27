@@ -11,7 +11,7 @@
 
 namespace jarrus90\User\Controllers;
 
-use jarrus90\User\Finder;
+use jarrus90\User\UserFinder;
 use jarrus90\User\models\Profile;
 use jarrus90\User\models\User;
 use jarrus90\User\models\UserSearch;
@@ -20,7 +20,7 @@ use jarrus90\User\traits\EventTrait;
 use Yii;
 use yii\base\ExitException;
 use yii\base\Model;
-use yii\base\Module as Module2;
+use yii\base\Module as BaseModule;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use jarrus90\Core\Web\Controllers\AdminController as Controller;
@@ -123,16 +123,16 @@ class AdminController extends Controller {
      */
     const EVENT_AFTER_UNBLOCK = 'afterUnblock';
 
-    /** @var Finder */
+    /** @var UserFinder */
     protected $finder;
 
     /**
      * @param string  $id
-     * @param Module2 $module
-     * @param Finder  $finder
+     * @param BaseModule $module
+     * @param UserFinder  $finder
      * @param array   $config
      */
-    public function __construct($id, $module, Finder $finder, $config = []) {
+    public function __construct($id, $module, UserFinder $finder, $config = []) {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }

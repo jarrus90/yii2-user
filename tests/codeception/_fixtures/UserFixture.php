@@ -6,6 +6,6 @@ use yii\test\ActiveFixture;
 
 class UserFixture extends ActiveFixture {
 
-    public $modelClass = 'dektrium\user\models\User';
+    public $modelClass = 'jarrus90\User\models\User';
 
 }

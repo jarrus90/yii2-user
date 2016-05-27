@@ -15,7 +15,7 @@
  * @var $filterModel  jarrus90\User\models\Search
  */
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 
 $this->title = Yii::t('rbac', 'Permissions');
@@ -29,6 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
 GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $filterModel,
+    'pjax' => true,
+    'hover' => true,
+    'export' => false,
     'layout' => "{items}\n{pager}",
     'columns' => [
         [

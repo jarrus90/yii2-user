@@ -18,11 +18,11 @@ use yii\base\Object;
 use yii\db\ActiveQuery;
 
 /**
- * Finder provides some useful methods for finding active record models.
+ * UserFinder provides some useful methods for finding active record models.
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class Finder extends Object {
+class UserFinder extends Object {
 
     /** @var ActiveQuery */
     protected $userQuery;
