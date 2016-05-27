@@ -17,7 +17,7 @@ $this->title = Yii::t('rbac', 'Create new role');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php $this->beginContent('@dektrium/rbac/views/layout.php') ?>
+<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
 
 <?=
 

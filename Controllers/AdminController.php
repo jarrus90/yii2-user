@@ -11,7 +11,6 @@
 
 namespace jarrus90\User\Controllers;
 
-use jarrus90\User\filters\AccessRule;
 use jarrus90\User\Finder;
 use jarrus90\User\models\Profile;
 use jarrus90\User\models\User;
@@ -22,7 +21,6 @@ use Yii;
 use yii\base\ExitException;
 use yii\base\Model;
 use yii\base\Module as Module2;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use jarrus90\Core\Web\Controllers\AdminController as Controller;

@@ -20,14 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-6">
         <div class="row">
-            <div class="col-sm-6 col-md-4">
-                <?=
-                Html::img($profile->getAvatarUrl(230), [
-                    'class' => 'img-rounded img-responsive',
-                    'alt' => $profile->user->username,
-                ])
-                ?>
-            </div>
             <div class="col-sm-6 col-md-8">
                 <h4><?= $this->title ?></h4>
                 <ul style="padding: 0; list-style: none outside none;">

@@ -34,7 +34,7 @@ $form = ActiveForm::begin([
 
 <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 
-<div class="form-group">
+<div class="row">
     <div class="col-lg-offset-3 col-lg-9">
         <?= Html::submitButton(Yii::t('user', 'Update'), ['class' => 'btn btn-block btn-success']) ?>
     </div>

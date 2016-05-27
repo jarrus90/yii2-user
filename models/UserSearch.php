@@ -13,42 +13,28 @@ namespace jarrus90\User\models;
 
 use jarrus90\User\Finder;
 use Yii;
-use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
  * UserSearch represents the model behind the search form about User.
  */
-class UserSearch extends Model {
+class UserSearch extends User {
 
     /** @var string */
-    public $username;
-
-    /** @var string */
-    public $email;
-
-    /** @var int */
-    public $created_at;
-
-    /** @var string */
-    public $registration_ip;
-
-    /** @var Finder */
-    protected $finder;
+    public $name;
 
     /**
      * @param Finder $finder
      * @param array  $config
      */
-    public function __construct(Finder $finder, $config = []) {
-        $this->finder = $finder;
+    public function __construct($config = []) {
         parent::__construct($config);
     }
 
     /** @inheritdoc */
     public function rules() {
         return [
-            'fieldsSafe' => [['username', 'email', 'registration_ip', 'created_at'], 'safe'],
+            'fieldsSafe' => [['email', 'created_at', 'name', 'confirmed_at', 'blocked_at'], 'safe'],
             'createdDefault' => ['created_at', 'default', 'value' => null],
         ];
     }
@@ -69,26 +55,40 @@ class UserSearch extends Model {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = $this->finder->getUserQuery();
-
+        $query = self::find()->addSelect(['user.*', 'profile.name'])->joinWith('profile');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                //'pageSize' => 1,
+            ],
         ]);
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
+        $dataProvider->sort->attributes['name'] = [
+            'asc'   => [self::tableName() . '.id' => SORT_ASC],
+            'desc'  => [self::tableName() . '.id' => SORT_DESC],
+        ];
+        if (($this->load($params) && $this->validate())) {
+            if ($this->created_at !== null) {
+                $date = strtotime($this->created_at);
+                $query->andFilterWhere(['between', 'created_at', $date, $date + 3600 * 24]);
+            }
+            if (!is_null($this->name) && $this->name != '') {
+                $clientName[] = explode(' ', $this->name);
+                foreach ($clientName AS $item) {
+                    $query->andFilterWhere(['like', Profile::tableName() . '.name' , $item]);
+                    /*$query->andFilterWhere(['or',
+                        ['like', Profile::tableName() . '.name', $item],
+                        ['like', Profile::tableName() . '.surname', $item]
+                    ]);*/
+                }
+            }
+            $query->andFilterWhere(['like', 'email', $this->email]);
         }
-
-        if ($this->created_at !== null) {
-            $date = strtotime($this->created_at);
-            $query->andFilterWhere(['between', 'created_at', $date, $date + 3600 * 24]);
-        }
-
-        $query->andFilterWhere(['like', 'username', $this->username])
-                ->andFilterWhere(['like', 'email', $this->email])
-                ->andFilterWhere(['registration_ip' => $this->registration_ip]);
 
         return $dataProvider;
     }
 
+    public function formName() {
+        return '';
+    }
 }

@@ -20,8 +20,6 @@ use yii\db\ActiveRecord;
  * @property integer $user_id
  * @property string  $name
  * @property string  $public_email
- * @property string  $gravatar_email
- * @property string  $gravatar_id
  * @property string  $location
  * @property string  $website
  * @property string  $bio
@@ -43,17 +41,6 @@ class Profile extends ActiveRecord {
     }
 
     /**
-     * Returns avatar url or null if avatar is not set.
-     * @param  int $size
-     * @return string|null
-     */
-    public function getAvatarUrl($size = 200) {
-        $protocol = \Yii::$app->request->isSecureConnection ? 'https' : 'http';
-
-        return $protocol . '://gravatar.com/avatar/' . $this->gravatar_id . '?s=' . $size;
-    }
-
-    /**
      * @return \yii\db\ActiveQueryInterface
      */
     public function getUser() {
@@ -68,11 +55,9 @@ class Profile extends ActiveRecord {
             'bioString' => ['bio', 'string'],
             'timeZoneValidation' => ['timezone', 'validateTimeZone'],
             'publicEmailPattern' => ['public_email', 'email'],
-            'gravatarEmailPattern' => ['gravatar_email', 'email'],
             'websiteUrl' => ['website', 'url'],
             'nameLength' => ['name', 'string', 'max' => 255],
             'publicEmailLength' => ['public_email', 'string', 'max' => 255],
-            'gravatarEmailLength' => ['gravatar_email', 'string', 'max' => 255],
             'locationLength' => ['location', 'string', 'max' => 255],
             'websiteLength' => ['website', 'string', 'max' => 255],
         ];
@@ -85,7 +70,6 @@ class Profile extends ActiveRecord {
         return [
             'name' => \Yii::t('user', 'Name'),
             'public_email' => \Yii::t('user', 'Email (public)'),
-            'gravatar_email' => \Yii::t('user', 'Gravatar email'),
             'location' => \Yii::t('user', 'Location'),
             'website' => \Yii::t('user', 'Website'),
             'bio' => \Yii::t('user', 'Bio'),
@@ -138,17 +122,6 @@ class Profile extends ActiveRecord {
         }
 
         return $dateTime->setTimezone($this->getTimeZone());
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function beforeSave($insert) {
-        if ($this->isAttributeChanged('gravatar_email')) {
-            $this->setAttribute('gravatar_id', md5(strtolower(trim($this->getAttribute('gravatar_email')))));
-        }
-
-        return parent::beforeSave($insert);
     }
 
     /**

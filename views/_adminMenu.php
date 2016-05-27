@@ -14,9 +14,7 @@
  */
 use yii\bootstrap\Nav;
 ?>
-
 <?=
-
 Nav::widget([
     'options' => [
         'class' => 'nav-tabs'
@@ -25,15 +23,14 @@ Nav::widget([
         [
             'label' => Yii::t('rbac', 'Users'),
             'url' => ['/user/admin/index'],
-            'visible' => isset(Yii::$app->extensions['dektrium/yii2-user']),
         ],
         [
             'label' => Yii::t('rbac', 'Roles'),
-            'url' => ['/rbac/role/index'],
+            'url' => ['/user/role/index'],
         ],
         [
             'label' => Yii::t('rbac', 'Permissions'),
-            'url' => ['/rbac/permission/index'],
+            'url' => ['/user/permission/index'],
         ],
         [
             'label' => Yii::t('rbac', 'Create'),
@@ -41,15 +38,14 @@ Nav::widget([
                 [
                     'label' => Yii::t('rbac', 'New user'),
                     'url' => ['/user/admin/create'],
-                    'visible' => isset(Yii::$app->extensions['dektrium/yii2-user']),
                 ],
                 [
                     'label' => Yii::t('rbac', 'New role'),
-                    'url' => ['/rbac/role/create']
+                    'url' => ['/user/role/create']
                 ],
                 [
                     'label' => Yii::t('rbac', 'New permission'),
-                    'url' => ['/rbac/permission/create']
+                    'url' => ['/user/permission/create']
                 ]
             ]
         ]

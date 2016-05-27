@@ -22,7 +22,7 @@ $this->title = Yii::t('rbac', 'Permissions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?php $this->beginContent('@dektrium/rbac/views/layout.php') ?>
+<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
 
 <?=
 
@@ -56,7 +56,7 @@ GridView::widget([
             'class' => ActionColumn::className(),
             'template' => '{update} {delete}',
             'urlCreator' => function ($action, $model) {
-                return Url::to(['/rbac/permission/' . $action, 'name' => $model['name']]);
+                return Url::to(['/user/permission/' . $action, 'name' => $model['name']]);
             },
                     'options' => [
                         'style' => 'width: 5%'

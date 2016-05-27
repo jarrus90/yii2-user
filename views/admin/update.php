@@ -22,13 +22,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?=
-$this->render('/_alert', [
-    'module' => Yii::$app->getModule('user'),
-])
-?>
-
-<?= $this->render('_menu') ?>
+<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
 
 <div class="row">
     <div class="col-md-3">
@@ -45,7 +39,6 @@ $this->render('/_alert', [
                         [
                             'label' => Yii::t('user', 'Assignments'),
                             'url' => ['/user/admin/assignments', 'id' => $user->id],
-                            'visible' => isset(Yii::$app->extensions['dektrium/yii2-rbac']),
                         ],
                         [
                             'label' => Yii::t('user', 'Confirm'),
@@ -94,8 +87,10 @@ $this->render('/_alert', [
     <div class="col-md-9">
         <div class="box box-primary">
             <div class="box-body">
-            <?= $content ?>
-                </div>
+                <?= $content ?>
+            </div>
         </div>
     </div>
 </div>
+
+<?php $this->endContent() ?>

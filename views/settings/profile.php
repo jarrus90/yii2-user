@@ -55,8 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'timezone')->dropDownList(\yii\helpers\ArrayHelper::map(\jarrus90\User\helpers\Timezone::getAll(), 'timezone', 'name')); ?>
 
-                <?= $form->field($model, 'gravatar_email')->hint(\yii\helpers\Html::a(Yii::t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com')) ?>
-
                 <?= $form->field($model, 'bio')->textarea() ?>
 
                 <div class="form-group">

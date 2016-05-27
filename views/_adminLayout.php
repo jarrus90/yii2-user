@@ -15,12 +15,12 @@
 
 <?=
 $this->render('/_alert', [
-    'module' => Yii::$app->getModule('rbac'),
+    'module' => Yii::$app->getModule('user'),
 ])
 ?>
-
-<?= $this->render('_menu') ?>
-
-<div style="padding: 10px 0">
-    <?= $content ?>
+<div class="nav-tabs-custom">
+    <?= $this->render('_adminMenu') ?>
+    <div class="tab-content">
+        <?= $content ?>
+    </div>
 </div>

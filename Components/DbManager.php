@@ -13,13 +13,14 @@ namespace jarrus90\User\Components;
 
 use yii\db\Query;
 use yii\rbac\DbManager as BaseDbManager;
+use yii\rbac\ManagerInterface as BaseManagerInterface;
 
 /**
  * This Auth manager changes visibility and signature of some methods from \yii\rbac\DbManager.
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class DbManager extends BaseDbManager {
+class DbManager extends BaseDbManager implements BaseManagerInterface{
 
     private $assignmentsCache = array();
     public $cachePrefix = 'RbacDbCache';
@@ -83,6 +84,13 @@ class DbManager extends BaseDbManager {
         parent::revokeAll($userId);
     }
 
+
+    /** @inheritdoc */
+    public function getItem($name)
+    {
+        return parent::getItem($name);
+    }
+    
     /**
      * @param  int|null $type         If null will return all auth items.
      * @param  array    $excludeItems Items that should be excluded from result array.

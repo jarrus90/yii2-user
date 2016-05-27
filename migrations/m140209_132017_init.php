@@ -47,8 +47,6 @@ class m140209_132017_init extends Migration {
             'user_id' => Schema::TYPE_INTEGER . ' PRIMARY KEY',
             'name' => Schema::TYPE_STRING . '(255)',
             'public_email' => Schema::TYPE_STRING . '(255)',
-            'gravatar_email' => Schema::TYPE_STRING . '(255)',
-            'gravatar_id' => Schema::TYPE_STRING . '(32)',
             'location' => Schema::TYPE_STRING . '(255)',
             'website' => Schema::TYPE_STRING . '(255)',
             'bio' => Schema::TYPE_TEXT,

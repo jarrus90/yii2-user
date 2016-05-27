@@ -11,11 +11,10 @@
 
 use jarrus90\User\models\UserSearch;
 use yii\data\ActiveDataProvider;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Html;
-use yii\jui\DatePicker;
 use yii\web\View;
-use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /**
  * @var View $this
@@ -26,44 +25,39 @@ $this->title = Yii::t('user', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?=
-$this->render('/_alert', [
-    'module' => Yii::$app->getModule('user'),
-])
-?>
-
-<?= $this->render('/admin/_menu') ?>
-
-<?php Pjax::begin() ?>
-
+<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
 <?=
 GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}",
+    'pjax' => true,
+    'hover' => true,
+    'export' => false,
+    'layout' => "{items}{pager}",
+    'pager' => ['options' => ['class'=> 'pagination pagination-sm no-margin']],
     'columns' => [
-        'username',
-        'email:email',
         [
-            'attribute' => 'registration_ip',
-            'value' => function ($model) {
-                return $model->registration_ip == null ? '<span class="not-set">' . Yii::t('user', '(not set)') . '</span>' : $model->registration_ip;
-            },
-            'format' => 'html',
+            'attribute' => 'name',
+            'width' => '30%'
+        ],
+        [
+            'attribute' => 'email',
+            'width' => '20%'
         ],
         [
             'attribute' => 'created_at',
             'value' => function ($model) {
                 return Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [$model->created_at]);
             },
-            'filter' => DatePicker::widget([
+            /*'filter' => DatePicker::widget([
                 'model' => $searchModel,
                 'attribute' => 'created_at',
                 'dateFormat' => 'php:Y-m-d',
                 'options' => [
                     'class' => 'form-control',
                 ],
-            ]),
+            ]),*/
+            'width' => '20%'
         ],
         [
             'header' => Yii::t('user', 'Confirmation'),
@@ -80,6 +74,7 @@ GridView::widget([
             },
             'format' => 'raw',
             'visible' => Yii::$app->getModule('user')->enableConfirmation,
+            'width' => '10%'
         ],
         [
             'header' => Yii::t('user', 'Block status'),
@@ -107,5 +102,4 @@ GridView::widget([
     ],
 ]);
 ?>
-
-<?php Pjax::end() ?>
+<?php $this->endContent() ?>
