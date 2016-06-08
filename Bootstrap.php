@@ -113,7 +113,6 @@ class Bootstrap implements BootstrapInterface {
                     'class' => DbManager::className(),
                 ]);
             }
-
             $app->params['yii.migrations'][] = '@jarrus90/User/migrations/';
             Yii::$container->set('jarrus90\User\Mailer', $module->mailer);
         }

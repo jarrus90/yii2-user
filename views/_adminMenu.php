@@ -21,7 +21,7 @@ Nav::widget([
     ],
     'items' => [
         [
-            'label' => Yii::t('rbac', 'Users'),
+            'label' => Yii::t('user', 'Users'),
             'url' => ['/user/admin/index'],
         ],
         [
@@ -33,10 +33,10 @@ Nav::widget([
             'url' => ['/user/permission/index'],
         ],
         [
-            'label' => Yii::t('rbac', 'Create'),
+            'label' => Yii::t('user', 'Create'),
             'items' => [
                 [
-                    'label' => Yii::t('rbac', 'New user'),
+                    'label' => Yii::t('user', 'New user'),
                     'url' => ['/user/admin/create'],
                 ],
                 [
