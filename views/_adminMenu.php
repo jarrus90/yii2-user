@@ -23,31 +23,17 @@ Nav::widget([
         [
             'label' => Yii::t('user', 'Users'),
             'url' => ['/user/admin/index'],
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\AdminController)
         ],
         [
             'label' => Yii::t('rbac', 'Roles'),
             'url' => ['/user/role/index'],
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\RoleController)
         ],
         [
             'label' => Yii::t('rbac', 'Permissions'),
             'url' => ['/user/permission/index'],
-        ],
-        [
-            'label' => Yii::t('user', 'Create'),
-            'items' => [
-                [
-                    'label' => Yii::t('user', 'New user'),
-                    'url' => ['/user/admin/create'],
-                ],
-                [
-                    'label' => Yii::t('rbac', 'New role'),
-                    'url' => ['/user/role/create']
-                ],
-                [
-                    'label' => Yii::t('rbac', 'New permission'),
-                    'url' => ['/user/permission/create']
-                ]
-            ]
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\PermissionController)
         ]
     ]
 ])

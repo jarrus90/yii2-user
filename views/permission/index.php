@@ -14,6 +14,7 @@
  * @var $this         yii\web\View
  * @var $filterModel  jarrus90\User\models\Search
  */
+use yii\helpers\Html;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
 use yii\helpers\Url;
@@ -32,7 +33,25 @@ GridView::widget([
     'pjax' => true,
     'hover' => true,
     'export' => false,
-    'layout' => "{items}\n{pager}",
+    'toolbar' => [
+        ['content' =>
+            Html::a('<i class="glyphicon glyphicon-plus"></i>', Url::toRoute(['create']), [
+                'data-pjax' => 0,
+                'class' => 'btn btn-default',
+                'title' => \Yii::t('content', 'New block')]
+            )
+            . ' ' .
+            Html::a('<i class="glyphicon glyphicon-repeat"></i>', Url::toRoute(['index']), [
+                'data-pjax' => 0,
+                'class' => 'btn btn-default',
+                'title' => Yii::t('content', 'Reset filter')]
+            )
+        ],
+    ],
+    'panel' => [
+        'type' => \kartik\grid\GridView::TYPE_DEFAULT
+    ],
+    'layout' => "{toolbar}{items}{pager}",
     'columns' => [
         [
             'attribute' => 'name',

@@ -33,7 +33,25 @@ GridView::widget([
     'pjax' => true,
     'hover' => true,
     'export' => false,
-    'layout' => "{items}{pager}",
+    'toolbar' => [
+        ['content' =>
+            Html::a('<i class="glyphicon glyphicon-plus"></i>', Url::toRoute(['create']), [
+                'data-pjax' => 0,
+                'class' => 'btn btn-default',
+                'title' => \Yii::t('content', 'New block')]
+            )
+            . ' ' .
+            Html::a('<i class="glyphicon glyphicon-repeat"></i>', Url::toRoute(['index']), [
+                'data-pjax' => 0,
+                'class' => 'btn btn-default',
+                'title' => Yii::t('content', 'Reset filter')]
+            )
+        ],
+    ],
+    'panel' => [
+        'type' => \kartik\grid\GridView::TYPE_DEFAULT
+    ],
+    'layout' => "{toolbar}{items}{pager}",
     'pager' => ['options' => ['class'=> 'pagination pagination-sm no-margin']],
     'columns' => [
         [
@@ -49,14 +67,6 @@ GridView::widget([
             'value' => function ($model) {
                 return Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [$model->created_at]);
             },
-            /*'filter' => DatePicker::widget([
-                'model' => $searchModel,
-                'attribute' => 'created_at',
-                'dateFormat' => 'php:Y-m-d',
-                'options' => [
-                    'class' => 'form-control',
-                ],
-            ]),*/
             'width' => '20%'
         ],
         [
