@@ -55,7 +55,7 @@ class Account extends ActiveRecord {
      * @return User
      */
     public function getUser() {
-        return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**

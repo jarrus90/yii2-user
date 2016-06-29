@@ -81,7 +81,7 @@ class RecoveryForm extends Model {
             'emailExist' => [
                 'email',
                 'exist',
-                'targetClass' => $this->module->modelMap['User'],
+                'targetClass' => User::className(),
                 'message' => Yii::t('user', 'There is no user with this email address'),
             ],
             'emailUnconfirmed' => [

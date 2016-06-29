@@ -21,6 +21,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0",
         "yiisoft/yii2-authclient": "~2.0",
         "yiisoft/yii2-bootstrap": "~2.0",
+        "creocoder/yii2-flysystem": "0.8.*",
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-widget-select2": "*",
         "jarrus90/yii2-core": "*"

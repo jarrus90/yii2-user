@@ -199,7 +199,9 @@ class Mailer extends Component {
             $this->sender = isset(Yii::$app->params['adminEmail']) ? Yii::$app->params['adminEmail'] : 'no-reply@example.com';
         }
 
-        return $mailer->compose(['html' => $view, 'text' => 'text/' . $view], $params)
+        return $mailer->compose([
+                            'html' => $view,
+                            'text' => 'text/' . $view], $params)
                         ->setTo($to)
                         ->setFrom($this->sender)
                         ->setSubject($subject)

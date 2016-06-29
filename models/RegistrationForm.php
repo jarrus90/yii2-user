@@ -43,7 +43,7 @@ class RegistrationForm extends Model {
      * @inheritdoc
      */
     public function rules() {
-        $user = $this->module->modelMap['User'];
+        $user = User::className();
 
         return [
             // username rules

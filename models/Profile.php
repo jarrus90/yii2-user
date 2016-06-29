@@ -44,7 +44,7 @@ class Profile extends ActiveRecord {
      * @return \yii\db\ActiveQueryInterface
      */
     public function getUser() {
-        return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
@@ -122,6 +122,10 @@ class Profile extends ActiveRecord {
         }
 
         return $dateTime->setTimezone($this->getTimeZone());
+    }
+
+    public function getAvatarUrl() {
+        return 'http://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
     }
 
     /**

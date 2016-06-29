@@ -29,41 +29,6 @@ component class you should set in `user` application component configuration:
 ],
 ```
 
-- ModelManager component has been removed. If you override models, now you
-should set them via `modelMap` module's property.
-
-**Before:**
-
-```php
-'modules' => [
-    'user' => [
-        'class' => 'jarrus90\User\Module',
-        'components' => [
-            'manager' => [
-                'User' => 'your\model\User',
-                'Profile' => 'your\model\Profile',
-                ...
-            ],
-        ],
-    ],
-],
-```
-
-**After:**
-
-```php
-'modules' => [
-    'user' => [
-        'class' => 'jarrus90\User\Module',
-        'modelMap' => [
-            'User' => 'your\model\User',
-            'Profile' => 'your\model\Profile',
-            ...
-        ],
-    ],
-],
-```
-
 - Mailer component has been changed. Now it should be configured via `mailer`
 module property. You can read more about mailer configuration [here](docs/mailer.md).
 

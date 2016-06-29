@@ -68,7 +68,7 @@ class ResendForm extends Model {
         return [
             'emailRequired' => ['email', 'required'],
             'emailPattern' => ['email', 'email'],
-            'emailExist' => ['email', 'exist', 'targetClass' => $this->module->modelMap['User']],
+            'emailExist' => ['email', 'exist', 'targetClass' => User::className()],
             'emailConfirmed' => [
                 'email',
                 function () {

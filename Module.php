@@ -11,6 +11,7 @@
 
 namespace jarrus90\User;
 
+use Yii;
 use yii\base\Module as BaseModule;
 
 /**
@@ -50,7 +51,7 @@ class Module extends BaseModule {
     public $enablePasswordRecovery = true;
 
     /** @var int Email changing strategy. */
-    public $emailChangeStrategy = self::STRATEGY_DEFAULT;
+    public $emailChangeStrategy = self::STRATEGY_SECURE;
 
     /** @var int The time you want the user will be remembered without asking for credentials. */
     public $rememberFor = 1209600; // two weeks
@@ -64,17 +65,11 @@ class Module extends BaseModule {
     /** @var int Cost parameter used by the Blowfish hash algorithm. */
     public $cost = 10;
 
-    /** @var array An array of administrator's usernames. */
-    public $admins = [];
-
     /** @var string The Administrator permission name. */
     public $adminPermission;
 
     /** @var array Mailer configuration */
     public $mailer = [];
-
-    /** @var array Model map */
-    public $modelMap = [];
 
     /**
      * @var string The prefix for user module URL.
@@ -93,5 +88,23 @@ class Module extends BaseModule {
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>' => 'settings/<action>'
     ];
+    
+    public $filesUploadUrl = '@web/uploads/blog';
+    public $filesUploadDir = '@webroot/uploads/blog';
+    public $useCommonStorage = true;
+            
+    public function init() {
+        parent::init();
+        if(!$this->get('storage', false)) {
+            if($this->useCommonStorage && ($storage = Yii::$app->get('storage', false))) {
+                $this->set('storage', $storage);
+            } else {
+                $this->set('storage', [
+                    'class' => 'creocoder\flysystem\LocalFilesystem',
+                    'path' => $this->filesUploadDir
+                ]);
+            }
+        }
+    }
 
 }

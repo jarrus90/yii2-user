@@ -26,54 +26,27 @@ use jarrus90\User\Components\DbManager;
  */
 class Bootstrap implements BootstrapInterface {
 
-    /** @var array Model's map */
-    private $_modelMap = [
-        'User' => 'jarrus90\User\models\User',
-        'Account' => 'jarrus90\User\models\Account',
-        'Profile' => 'jarrus90\User\models\Profile',
-        'Token' => 'jarrus90\User\models\Token',
-        'RegistrationForm' => 'jarrus90\User\models\RegistrationForm',
-        'ResendForm' => 'jarrus90\User\models\ResendForm',
-        'LoginForm' => 'jarrus90\User\models\LoginForm',
-        'SettingsForm' => 'jarrus90\User\models\SettingsForm',
-        'RecoveryForm' => 'jarrus90\User\models\RecoveryForm',
-        'UserSearch' => 'jarrus90\User\models\UserSearch',
-    ];
-
     /** @inheritdoc */
     public function bootstrap($app) {
         /** @var Module $module */
         /** @var \yii\db\ActiveRecord $modelName */
         if ($app->hasModule('user') && ($module = $app->getModule('user')) instanceof Module) {
-            $this->_modelMap = array_merge($this->_modelMap, $module->modelMap);
-            foreach ($this->_modelMap as $name => $definition) {
-                $class = "jarrus90\\User\\models\\" . $name;
-                Yii::$container->set($class, $definition);
-                $modelName = is_array($definition) ? $definition['class'] : $definition;
-                $module->modelMap[$name] = $modelName;
-                if (in_array($name, ['User', 'Profile', 'Token', 'Account'])) {
-                    Yii::$container->set($name . 'Query', function () use ($modelName) {
-                        return $modelName::find();
-                    });
-                }
-            }
             Yii::$container->setSingleton(UserFinder::className(), [
-                'userQuery' => Yii::$container->get('UserQuery'),
-                'profileQuery' => Yii::$container->get('ProfileQuery'),
-                'tokenQuery' => Yii::$container->get('TokenQuery'),
-                'accountQuery' => Yii::$container->get('AccountQuery'),
+                'userQuery' => \jarrus90\User\models\User::find(),
+                'profileQuery' => \jarrus90\User\models\Profile::find(),
+                'tokenQuery' => \jarrus90\User\models\Token::find(),
+                'accountQuery' => \jarrus90\User\models\Account::find(),
             ]);
 
-            if ($app instanceof ConsoleApplication) {
-                
-            } else {
+            if (!$app instanceof ConsoleApplication) {
                 $module->controllerNamespace = 'jarrus90\User\Controllers';
-                Yii::$container->set('yii\web\User', [
-                    'enableAutoLogin' => true,
-                    'loginUrl' => ['/user/security/login'],
-                    'identityClass' => $module->modelMap['User'],
-                ]);
-
+                if(!Yii::$container->has('yii\web\User')) {
+                    Yii::$container->set('yii\web\User', [
+                        'enableAutoLogin' => true,
+                        'loginUrl' => ['/user/security/login'],
+                        'identityClass' => \jarrus90\User\models\User::className(),
+                    ]);
+                }
                 $configUrlRule = [
                     'prefix' => $module->urlPrefix,
                     'rules' => $module->urlRules,

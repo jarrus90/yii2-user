@@ -78,7 +78,7 @@ class SettingsForm extends Model {
             'emailPattern' => ['email', 'email'],
             'emailUsernameUnique' => [['email', 'username'], 'unique', 'when' => function ($model, $attribute) {
             return $this->user->$attribute != $model->$attribute;
-        }, 'targetClass' => $this->module->modelMap['User']],
+        }, 'targetClass' => User::className()],
             'newPasswordLength' => ['new_password', 'string', 'min' => 6],
             'currentPasswordRequired' => ['current_password', 'required'],
             'currentPasswordValidate' => ['current_password', function ($attr) {
