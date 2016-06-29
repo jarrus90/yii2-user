@@ -34,8 +34,8 @@ $form = ActiveForm::begin([
 ?>
 
 <?= $form->field($profile, 'name') ?>
+<?= $form->field($profile, 'name') ?>
 <?= $form->field($profile, 'public_email') ?>
-<?= $form->field($profile, 'website') ?>
 <?= $form->field($profile, 'location') ?>
 <?= $form->field($profile, 'bio')->textarea() ?>
 

@@ -148,7 +148,6 @@ return [
     'We have received a request to change the email address for your account on {0}' => 'Вы запросили смену email на сайте {0}',
     'We have received a request to reset the password for your account on {0}' => 'Вы запросили смену пароля на сайте {0}',
     'We have sent confirmation links to both old and new email addresses. You must click both links to complete your request' => 'Мы отправили письма на ваш старый и новый почтовые ящики. Вы должны перейти по обеим, чтобы завершить процесс смены адреса.',
-    'Website' => 'Вебсайт',
     'Welcome to {0}' => 'Добро пожаловать на {0}',
     'Welcome! Registration is complete.' => 'Добро пожаловать! Вы были успешно зарегистрированы и авторизованы.',
     'You can assign multiple roles or permissions to user by using the form below' => 'Вы можете добавить пользователю несколько ролей или разрешений, используя форму ниже',

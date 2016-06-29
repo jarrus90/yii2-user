@@ -21,7 +21,6 @@ use yii\db\ActiveRecord;
  * @property string  $name
  * @property string  $public_email
  * @property string  $location
- * @property string  $website
  * @property string  $bio
  * @property string  $timezone
  * @property User    $user
@@ -55,11 +54,9 @@ class Profile extends ActiveRecord {
             'bioString' => ['bio', 'string'],
             'timeZoneValidation' => ['timezone', 'validateTimeZone'],
             'publicEmailPattern' => ['public_email', 'email'],
-            'websiteUrl' => ['website', 'url'],
             'nameLength' => ['name', 'string', 'max' => 255],
             'publicEmailLength' => ['public_email', 'string', 'max' => 255],
             'locationLength' => ['location', 'string', 'max' => 255],
-            'websiteLength' => ['website', 'string', 'max' => 255],
         ];
     }
 
@@ -71,7 +68,6 @@ class Profile extends ActiveRecord {
             'name' => \Yii::t('user', 'Name'),
             'public_email' => \Yii::t('user', 'Email (public)'),
             'location' => \Yii::t('user', 'Location'),
-            'website' => \Yii::t('user', 'Website'),
             'bio' => \Yii::t('user', 'Bio'),
             'timezone' => \Yii::t('user', 'Time zone'),
         ];

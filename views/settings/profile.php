@@ -49,8 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'public_email') ?>
 
-                <?= $form->field($model, 'website') ?>
-
                 <?= $form->field($model, 'location') ?>
 
                 <?= $form->field($model, 'timezone')->dropDownList(\yii\helpers\ArrayHelper::map(\jarrus90\User\helpers\Timezone::getAll(), 'timezone', 'name')); ?>
