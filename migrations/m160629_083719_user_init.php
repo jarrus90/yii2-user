@@ -25,9 +25,9 @@ class m160629_083719_user_init extends Migration {
             'flags' => $this->integer()->notNull()->defaultValue(0),
                 ], $tableOptions);
 
-        $this->createIndex('idx-user_unique_email', '{{%user}}', 'email', 1);
-        $this->createIndex('idx-user_unique_username', '{{%user}}', 'username', 1);
-        
+        $this->createIndex('idx-user-email', '{{%user}}', 'email', 1);
+        $this->createIndex('idx-user-username', '{{%user}}', 'username', 1);
+
         $this->createTable('{{%profile}}', [
             'user_id' => $this->integer()->notNull(),
             'name' => $this->string(255),
@@ -37,8 +37,8 @@ class m160629_083719_user_init extends Migration {
             'bio' => $this->text(),
             'timezone' => $this->string(40)->notNull(),
                 ], $tableOptions);
-        $this->createIndex('idx-user_id', '{{%profile}}', 'user_id');
-        $this->addForeignKey('fk-profile_user_id', '{{%profile}}', 'user_id', '{{%user}}', 'id');
+        $this->createIndex('idx-profile-user', '{{%profile}}', 'user_id');
+        $this->addForeignKey('fk-profile-user', '{{%profile}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
         $this->createTable('{{%social_account}}', [
             'id' => $this->primaryKey(),
@@ -52,11 +52,11 @@ class m160629_083719_user_init extends Migration {
             'username' => $this->string(255),
                 ], $tableOptions);
 
-        $this->createIndex('idx-account_unique', '{{%social_account}}', ['provider', 'client_id'], 1);
-        $this->createIndex('idx-account_unique_code', '{{%social_account}}', 'code', 1);
-        $this->createIndex('idx-user_account', '{{%social_account}}', 'user_id');
-        $this->addForeignKey('fk-social_account_user_id', '{{%social_account}}', 'user_id', '{{%user}}', 'id');
-        
+        $this->createIndex('idx-social_account-user', '{{%social_account}}', 'user_id');
+        $this->createIndex('idx-social_account-unique', '{{%social_account}}', ['provider', 'client_id'], 1);
+        $this->createIndex('idx-social_account-unique_code', '{{%social_account}}', 'code', 1);
+        $this->addForeignKey('fk-social_account-user_id', '{{%social_account}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
+
         $this->createTable('{{%token}}', [
             'user_id' => $this->integer()->notNull(),
             'code' => $this->string(32)->notNull(),
@@ -64,9 +64,9 @@ class m160629_083719_user_init extends Migration {
             'type' => $this->smallInteger(6)->notNull(),
                 ], $tableOptions);
 
-        $this->createIndex('idx-token_unique', '{{%token}}', ['user_id', 'code', 'type'], 1);
-        $this->addForeignKey('fk-token_user_id', '{{%token}}', 'user_id', '{{%user}}', 'id');
-        
+        $this->createIndex('idx-token-unique', '{{%token}}', ['user_id', 'code', 'type'], 1);
+        $this->addForeignKey('fk-token-user_id', '{{%token}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
+
         $this->createTable('{{%user_rbac_rule}}', [
             'name' => $this->string(64)->notNull(),
             'data' => $this->text(),
@@ -74,6 +74,8 @@ class m160629_083719_user_init extends Migration {
             'updated_at' => $this->integer(),
                 ], $tableOptions);
         
+        $this->createIndex('idx-user_rbac_rule-name', '{{%user_rbac_rule}}', 'name');
+
         $this->createTable('{{%user_rbac_item}}', [
             'name' => $this->string(64)->notNull(),
             'type' => $this->integer()->notNull(),
@@ -83,20 +85,21 @@ class m160629_083719_user_init extends Migration {
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
                 ], $tableOptions);
-        
-        $this->createIndex('idx-auth_item-type', '{{%user_rbac_item}}', 'type');
-        $this->createIndex('idx-user_rbac_item_rule', '{{%user_rbac_item}}', 'rule_name');
-        $this->addForeignKey('fk-user_rbac_item_rule_name', '{{%user_rbac_item}}', 'rule_name', '{{%user_rbac_rule}}', 'name');
-               
+
+        $this->createIndex('idx-user_rbac_item-name', '{{%user_rbac_item}}', 'name');
+        $this->createIndex('idx-user_rbac_item-type', '{{%user_rbac_item}}', 'type');
+        $this->createIndex('idx-user_rbac_item-rule', '{{%user_rbac_item}}', 'rule_name');
+        $this->addForeignKey('fk-user_rbac_item_rule_name', '{{%user_rbac_item}}', 'rule_name', '{{%user_rbac_rule}}', 'name', 'CASCADE', 'RESTRICT');
+
         $this->createTable('{{%user_rbac_assignment}}', [
             'item_name' => $this->string(64)->notNull(),
             'user_id' => $this->integer()->notNull(),
             'created_at' => $this->integer(),
                 ], $tableOptions);
-        
+
         $this->createIndex('idx-user_rbac_assignment_user', '{{%user_rbac_assignment}}', 'user_id');
-        $this->addForeignKey('fk-user_rbac_assignment_item_name', '{{%user_rbac_assignment}}', 'item_name', '{{%user_rbac_item}}', 'name');
-        $this->addForeignKey('fk-user_rbac_assignment_user_id', '{{%user_rbac_assignment}}', 'user_id', '{{%user}}', 'id');
+        $this->addForeignKey('fk-user_rbac_assignment_item_name', '{{%user_rbac_assignment}}', 'item_name', '{{%user_rbac_item}}', 'name', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('fk-user_rbac_assignment_user_id', '{{%user_rbac_assignment}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
         $this->createTable('{{%user_rbac_item_child}}', [
             'parent' => $this->string(64)->notNull(),
@@ -104,8 +107,8 @@ class m160629_083719_user_init extends Migration {
                 ], $tableOptions);
 
         $this->createIndex('idx-user_rbac_item_child', '{{%user_rbac_item_child}}', 'child');
-        $this->addForeignKey('fk-user_rbac_item_child_child', '{{%user_rbac_item_child}}', 'child', '{{%user_rbac_item}}', 'name');
-        $this->addForeignKey('fk-user_rbac_item_child_parent', '{{%user_rbac_item_child}}', 'parent', '{{%user_rbac_item}}', 'name');
+        $this->addForeignKey('fk-user_rbac_item_child_child', '{{%user_rbac_item_child}}', 'child', '{{%user_rbac_item}}', 'name', 'CASCADE', 'RESTRICT');
+        $this->addForeignKey('fk-user_rbac_item_child_parent', '{{%user_rbac_item_child}}', 'parent', '{{%user_rbac_item}}', 'name', 'CASCADE', 'RESTRICT');
     }
 
     public function safeDown() {
@@ -114,9 +117,9 @@ class m160629_083719_user_init extends Migration {
         $this->dropForeignKey('fk-user_rbac_item_rule_name', '{{%user_rbac_item}}');
         $this->dropForeignKey('fk-user_rbac_item_child_child', '{{%user_rbac_item_child}}');
         $this->dropForeignKey('fk-user_rbac_item_child_parent', '{{%user_rbac_item_child}}');
-        $this->dropForeignKey('fk-profile_user_id', '{{%profile}}');
-        $this->dropForeignKey('fk-social_account_user_id', '{{%social_account}}');
-        $this->dropForeignKey('fk-token_user_id', '{{%token}}');
+        $this->dropForeignKey('fk-profile-user', '{{%profile}}');
+        $this->dropForeignKey('fk-social_account-user_id', '{{%social_account}}');
+        $this->dropForeignKey('fk-token-user_id', '{{%token}}');
         $this->dropTable('{{%user}}');
         $this->dropTable('{{%profile}}');
         $this->dropTable('{{%social_account}}');
