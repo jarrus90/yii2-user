@@ -90,7 +90,6 @@ return [
     'Invalid login or password' => 'Неправильный логин или пароль',
     'Invalid or expired link' => 'Ссылка неправильна или устарела',
     'Joined on {0, date}' => 'Присоединился {0, date}',
-    'Location' => 'Местоположение',
     'Login' => 'Логин',
     'Logout' => 'Выйти',
     'Manage users' => 'Управление пользователями',

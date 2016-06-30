@@ -20,7 +20,6 @@ use yii\db\ActiveRecord;
  * @property integer $user_id
  * @property string  $name
  * @property string  $public_email
- * @property string  $location
  * @property string  $bio
  * @property string  $timezone
  * @property User    $user
@@ -56,7 +55,6 @@ class Profile extends ActiveRecord {
             'publicEmailPattern' => ['public_email', 'email'],
             'nameLength' => ['name', 'string', 'max' => 255],
             'publicEmailLength' => ['public_email', 'string', 'max' => 255],
-            'locationLength' => ['location', 'string', 'max' => 255],
         ];
     }
 
@@ -67,7 +65,6 @@ class Profile extends ActiveRecord {
         return [
             'name' => \Yii::t('user', 'Name'),
             'public_email' => \Yii::t('user', 'Email (public)'),
-            'location' => \Yii::t('user', 'Location'),
             'bio' => \Yii::t('user', 'Bio'),
             'timezone' => \Yii::t('user', 'Time zone'),
         ];
