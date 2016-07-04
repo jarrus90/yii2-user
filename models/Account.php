@@ -48,7 +48,7 @@ class Account extends ActiveRecord {
 
     /** @inheritdoc */
     public static function tableName() {
-        return '{{%social_account}}';
+        return '{{%user_social_account}}';
     }
 
     /**

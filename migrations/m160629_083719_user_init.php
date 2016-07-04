@@ -28,7 +28,7 @@ class m160629_083719_user_init extends Migration {
         $this->createIndex('idx-user-email', '{{%user}}', 'email', 1);
         $this->createIndex('idx-user-username', '{{%user}}', 'username', 1);
 
-        $this->createTable('{{%profile}}', [
+        $this->createTable('{{%user_profile}}', [
             'user_id' => $this->integer()->notNull(),
             'name' => $this->string(255),
             'surname' => $this->string(255),
@@ -37,10 +37,10 @@ class m160629_083719_user_init extends Migration {
             'bio' => $this->text(),
             'timezone' => $this->string(40)->notNull(),
                 ], $tableOptions);
-        $this->createIndex('idx-profile-user', '{{%profile}}', 'user_id');
-        $this->addForeignKey('fk-profile-user', '{{%profile}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->createIndex('idx-profile-user', '{{%user_profile}}', 'user_id');
+        $this->addForeignKey('fk-profile-user', '{{%user_profile}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
-        $this->createTable('{{%social_account}}', [
+        $this->createTable('{{%user_social_account}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
             'provider' => $this->string(255)->notNull(),
@@ -52,20 +52,20 @@ class m160629_083719_user_init extends Migration {
             'username' => $this->string(255),
                 ], $tableOptions);
 
-        $this->createIndex('idx-social_account-user', '{{%social_account}}', 'user_id');
-        $this->createIndex('idx-social_account-unique', '{{%social_account}}', ['provider', 'client_id'], 1);
-        $this->createIndex('idx-social_account-unique_code', '{{%social_account}}', 'code', 1);
-        $this->addForeignKey('fk-social_account-user_id', '{{%social_account}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->createIndex('idx-user_social_account-user', '{{%user_social_account}}', 'user_id');
+        $this->createIndex('idx-user_social_account-unique', '{{%user_social_account}}', ['provider', 'client_id'], 1);
+        $this->createIndex('idx-user_social_account-unique_code', '{{%user_social_account}}', 'code', 1);
+        $this->addForeignKey('fk-user_social_account-user_id', '{{%user_social_account}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
-        $this->createTable('{{%token}}', [
+        $this->createTable('{{%user_token}}', [
             'user_id' => $this->integer()->notNull(),
             'code' => $this->string(32)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'type' => $this->smallInteger(6)->notNull(),
                 ], $tableOptions);
 
-        $this->createIndex('idx-token-unique', '{{%token}}', ['user_id', 'code', 'type'], 1);
-        $this->addForeignKey('fk-token-user_id', '{{%token}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
+        $this->createIndex('idx-token-unique', '{{%user_token}}', ['user_id', 'code', 'type'], 1);
+        $this->addForeignKey('fk-token-user_id', '{{%user_token}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
 
         $this->createTable('{{%user_rbac_rule}}', [
             'name' => $this->string(64)->notNull(),
@@ -117,13 +117,13 @@ class m160629_083719_user_init extends Migration {
         $this->dropForeignKey('fk-user_rbac_item_rule_name', '{{%user_rbac_item}}');
         $this->dropForeignKey('fk-user_rbac_item_child_child', '{{%user_rbac_item_child}}');
         $this->dropForeignKey('fk-user_rbac_item_child_parent', '{{%user_rbac_item_child}}');
-        $this->dropForeignKey('fk-profile-user', '{{%profile}}');
-        $this->dropForeignKey('fk-social_account-user_id', '{{%social_account}}');
-        $this->dropForeignKey('fk-token-user_id', '{{%token}}');
+        $this->dropForeignKey('fk-profile-user', '{{%user_profile}}');
+        $this->dropForeignKey('fk-user_social_account-user_id', '{{%user_social_account}}');
+        $this->dropForeignKey('fk-token-user_id', '{{%user_token}}');
         $this->dropTable('{{%user}}');
-        $this->dropTable('{{%profile}}');
-        $this->dropTable('{{%social_account}}');
-        $this->dropTable('{{%token}}');
+        $this->dropTable('{{%user_profile}}');
+        $this->dropTable('{{%user_social_account}}');
+        $this->dropTable('{{%user_token}}');
         $this->dropTable('{{%user_rbac_assignment}}');
         $this->dropTable('{{%user_rbac_item}}');
         $this->dropTable('{{%user_rbac_item_child}}');

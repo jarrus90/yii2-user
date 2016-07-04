@@ -118,6 +118,11 @@ use EventTrait;
                     'logout' => ['post'],
                 ],
             ],
+            'eauth' => [
+                // required to disable csrf validation on OpenID requests
+                'class' => \nodge\eauth\openid\ControllerBehavior::className(),
+                'only' => ['login'],
+            ],
         ];
     }
 
@@ -143,6 +148,25 @@ use EventTrait;
             $this->goHome();
         }
 
+        $serviceName = Yii::$app->getRequest()->getQueryParam('service');
+        if (isset($serviceName)) {
+            /** @var $eauth \nodge\eauth\ServiceBase */
+            $eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
+            $eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
+            $eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
+            try {
+                if ($eauth->authenticate()) {
+                    $identity = User::findByEAuth($eauth);
+                    Yii::$app->getUser()->login($identity);
+                    $eauth->redirect();
+                } else {
+                    $eauth->cancel();
+                }
+            } catch (\nodge\eauth\ErrorException $e) {
+                Yii::$app->getSession()->setFlash('error', 'EAuthException: ' . $e->getMessage());
+                $eauth->redirect($eauth->getCancelUrl());
+            }
+        }
         /** @var LoginForm $model */
         $model = Yii::createObject(LoginForm::className());
         $event = $this->getFormEvent($model);
@@ -168,13 +192,9 @@ use EventTrait;
      */
     public function actionLogout() {
         $event = $this->getUserEvent(Yii::$app->user->identity);
-
         $this->trigger(self::EVENT_BEFORE_LOGOUT, $event);
-
         Yii::$app->getUser()->logout();
-
         $this->trigger(self::EVENT_AFTER_LOGOUT, $event);
-
         return $this->goHome();
     }
 
