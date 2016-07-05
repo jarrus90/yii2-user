@@ -118,23 +118,6 @@ use EventTrait;
                     'logout' => ['post'],
                 ],
             ],
-            'eauth' => [
-                // required to disable csrf validation on OpenID requests
-                'class' => \nodge\eauth\openid\ControllerBehavior::className(),
-                'only' => ['login'],
-            ],
-        ];
-    }
-
-    /** @inheritdoc */
-    public function actions() {
-        return [
-            'auth' => [
-                'class' => AuthAction::className(),
-                // if user is not logged in, will try to log him in, otherwise
-                // will try to connect social account to user.
-                'successCallback' => Yii::$app->user->isGuest ? [$this, 'authenticate'] : [$this, 'connect'],
-            ],
         ];
     }
 
@@ -146,26 +129,6 @@ use EventTrait;
     public function actionLogin() {
         if (!Yii::$app->user->isGuest) {
             $this->goHome();
-        }
-
-        $serviceName = Yii::$app->getRequest()->getQueryParam('service');
-        if (isset($serviceName)) {
-            /** @var $eauth \nodge\eauth\ServiceBase */
-            $eauth = Yii::$app->get('eauth')->getIdentity($serviceName);
-            $eauth->setRedirectUrl(Yii::$app->getUser()->getReturnUrl());
-            $eauth->setCancelUrl(Yii::$app->getUrlManager()->createAbsoluteUrl('site/login'));
-            try {
-                if ($eauth->authenticate()) {
-                    $identity = User::findByEAuth($eauth);
-                    Yii::$app->getUser()->login($identity);
-                    $eauth->redirect();
-                } else {
-                    $eauth->cancel();
-                }
-            } catch (\nodge\eauth\ErrorException $e) {
-                Yii::$app->getSession()->setFlash('error', 'EAuthException: ' . $e->getMessage());
-                $eauth->redirect($eauth->getCancelUrl());
-            }
         }
         /** @var LoginForm $model */
         $model = Yii::createObject(LoginForm::className());
@@ -248,13 +211,9 @@ use EventTrait;
         /** @var Account $account */
         $account = Yii::createObject(Account::className());
         $event = $this->getAuthEvent($account, $client);
-
         $this->trigger(self::EVENT_BEFORE_CONNECT, $event);
-
         $account->connectWithUser($client);
-
         $this->trigger(self::EVENT_AFTER_CONNECT, $event);
-
         $this->action->successUrl = Url::to(['/user/settings/networks']);
     }
 
