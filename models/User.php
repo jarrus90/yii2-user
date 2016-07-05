@@ -217,7 +217,7 @@ class User extends ActiveRecord implements IdentityInterface {
      *
      * @return bool
      */
-    public function create() {
+    public function create($sendWelcome = true) {
         if ($this->getIsNewRecord() == false) {
             throw new \RuntimeException('Calling "' . __CLASS__ . '::' . __METHOD__ . '" on existing user');
         }
@@ -230,8 +230,9 @@ class User extends ActiveRecord implements IdentityInterface {
         if (!$this->save()) {
             return false;
         }
-
-        $this->mailer->sendWelcomeMessage($this, null, true);
+        if($sendWelcome) {
+            $this->mailer->sendWelcomeMessage($this, null, true);
+        }
         $this->trigger(self::AFTER_CREATE);
 
         return true;
