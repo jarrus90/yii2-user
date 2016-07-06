@@ -55,7 +55,7 @@ class UserSearch extends User {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = self::find()->addSelect(['user.*', 'profile.name'])->joinWith('profile');
+        $query = self::find()->addSelect([User::tableName() . '.*', Profile::tableName() . '.name'])->joinWith('profile');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
