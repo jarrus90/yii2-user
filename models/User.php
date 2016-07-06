@@ -183,6 +183,7 @@ class User extends ActiveRecord implements IdentityInterface {
                     'create' => ['username', 'email', 'password'],
                     'update' => ['username', 'email', 'password'],
                     'settings' => ['username', 'email', 'password'],
+                    'language' => ['lang'],
         ]);
     }
 
@@ -204,6 +205,8 @@ class User extends ActiveRecord implements IdentityInterface {
             // password rules
             'passwordRequired' => ['password', 'required', 'on' => ['register']],
             'passwordLength' => ['password', 'string', 'min' => 6, 'on' => ['register', 'create']],
+            
+            'langExists' => ['lang', 'exist', 'targetClass' => \jarrus90\Multilang\Models\Language::className(), 'targetAttribute' => 'code']
         ];
     }
 
@@ -414,11 +417,12 @@ class User extends ActiveRecord implements IdentityInterface {
                 $this->setAttribute('registration_ip', Yii::$app->request->userIP);
             }
         }
-
         if (!empty($this->password)) {
             $this->setAttribute('password_hash', Password::hash($this->password));
         }
-
+        if (empty($this->lang)) {
+            $this->setAttribute('lang', Yii::$app->language);
+        }
         return parent::beforeSave($insert);
     }
 
