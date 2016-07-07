@@ -85,6 +85,7 @@ class Bootstrap implements BootstrapInterface {
                 $app->params['admin']['menu']['user'] = [
                     'label' => Yii::t('user', 'Users'),
                     'position' => 2,
+                    'prepend' => '<i class="fa fa-users"></i>',
                     'items' => [
                         [
                             'label' => Yii::t('user', 'Users'),
