@@ -38,6 +38,22 @@ class Bootstrap implements BootstrapInterface {
                 'accountQuery' => \jarrus90\User\models\Account::find(),
             ]);
 
+
+            if (!isset($app->get('i18n')->translations['rbac*'])) {
+                $app->get('i18n')->translations['rbac*'] = [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => __DIR__ . '/messages',
+                    'sourceLanguage' => 'en-US'
+                ];
+            }
+            if (!isset($app->get('i18n')->translations['user*'])) {
+                $app->get('i18n')->translations['user*'] = [
+                    'class' => PhpMessageSource::className(),
+                    'basePath' => __DIR__ . '/messages',
+                    'sourceLanguage' => 'en-US'
+                ];
+            }
+            
             if (!$app instanceof ConsoleApplication) {
                 $module->controllerNamespace = 'jarrus90\User\Controllers';
                 if(!Yii::$container->has('yii\web\User')) {
@@ -66,27 +82,29 @@ class Bootstrap implements BootstrapInterface {
                         'class' => Collection::className(),
                     ]);
                 }
-            }
-
-            if (!isset($app->get('i18n')->translations['rbac*'])) {
-                $app->get('i18n')->translations['rbac*'] = [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => __DIR__ . '/messages',
-                    'sourceLanguage' => 'en-US'
+                $app->params['admin']['menu']['user'] = [
+                    'label' => Yii::t('user', 'Users'),
+                    'position' => 2,
+                    'items' => [
+                        [
+                            'label' => Yii::t('user', 'Users'),
+                            'url' => '/user/admin/index'
+                        ],
+                        [
+                            'label' => Yii::t('rbac', 'Roles'),
+                            'url' => '/user/role/index'
+                        ],
+                        [
+                            'label' => Yii::t('rbac', 'Permissions'),
+                            'url' => '/user/permission/index'
+                        ],
+                    ]
                 ];
-            }
-            if (!isset($app->get('i18n')->translations['user*'])) {
-                $app->get('i18n')->translations['user*'] = [
-                    'class' => PhpMessageSource::className(),
-                    'basePath' => __DIR__ . '/messages',
-                    'sourceLanguage' => 'en-US'
-                ];
-            }
-            if (!isset($app->get('i18n')->translations['user*'])) {
-                $app->get('i18n')->translations['eauth*'] = [
-                    'class' => PhpMessageSource::className(),
-                    'basePath' => '@eauth/messages',
-                    'sourceLanguage' => 'en-US'
+                
+                $app->params['admin']['menu']['logout'] = [
+                    'label' => Yii::t('user', 'Logout'),
+                    'prepend' => '<i class="fa fa-sign-out"></i>',
+                    'url' => '/user/security/logout'
                 ];
             }
             if (!$app->authManager instanceof DbManager) {

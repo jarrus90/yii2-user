@@ -19,10 +19,8 @@ use jarrus90\User\Module;
 use jarrus90\Core\Traits\AjaxValidationTrait;
 use jarrus90\User\traits\EventTrait;
 use Yii;
-use yii\authclient\AuthAction;
 use yii\authclient\ClientInterface;
 use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use jarrus90\Core\Web\Controllers\FrontController as Controller;
 use yii\web\Response;
@@ -110,12 +108,6 @@ use EventTrait;
                 'rules' => [
                     ['allow' => true, 'actions' => ['login', 'auth', 'blocked'], 'roles' => ['?']],
                     ['allow' => true, 'actions' => ['login', 'auth', 'logout'], 'roles' => ['@']],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
                 ],
             ],
         ];

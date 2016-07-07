@@ -23,17 +23,20 @@ Nav::widget([
         [
             'label' => Yii::t('user', 'Users'),
             'url' => ['/user/admin/index'],
-            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\AdminController)
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\AdminController),
+            'visible' => Yii::$app->user->can('user_admin')
         ],
         [
             'label' => Yii::t('rbac', 'Roles'),
             'url' => ['/user/role/index'],
-            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\RoleController)
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\RoleController),
+            'visible' => Yii::$app->user->can('admin_super')
         ],
         [
             'label' => Yii::t('rbac', 'Permissions'),
             'url' => ['/user/permission/index'],
-            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\PermissionController)
+            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\PermissionController),
+            'visible' => Yii::$app->user->can('admin_super')
         ]
     ]
 ])

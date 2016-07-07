@@ -27,6 +27,7 @@ use jarrus90\Core\Web\Controllers\AdminController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\filters\AccessControl;
 
 /**
  * AdminController allows you to administrate users.
@@ -148,15 +149,15 @@ class AdminController extends Controller {
                     'block' => ['post'],
                 ],
             ],
-            /*'access' => [
+            'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['user_admin'],
                     ],
                 ],
-            ],*/
+            ],
         ];
     }
 

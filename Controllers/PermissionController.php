@@ -14,6 +14,7 @@ namespace jarrus90\User\Controllers;
 use yii\rbac\Permission;
 use yii\web\NotFoundHttpException;
 use yii\rbac\Item;
+use yii\filters\AccessControl;
 
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
@@ -25,6 +26,21 @@ class PermissionController extends ItemControllerAbstract {
 
     /** @var int */
     protected $type = Item::TYPE_PERMISSION;
+
+    /** @inheritdoc */
+    public function behaviors() {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['admin_super'],
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /** @inheritdoc */
     protected function getItem($name) {
