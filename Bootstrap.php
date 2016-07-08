@@ -111,6 +111,7 @@ class Bootstrap implements BootstrapInterface {
             if (!$app->authManager instanceof DbManager) {
                 $app->set('authManager', [
                     'class' => DbManager::className(),
+                    'cache' => $app->cache
                 ]);
             }
             $app->params['yii.migrations'][] = '@jarrus90/User/migrations/';
