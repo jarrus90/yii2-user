@@ -29,6 +29,7 @@ class m160629_083719_user_init extends Migration {
         $this->createIndex('idx-user-username', '{{%user}}', 'username', 1);
 
         $this->createTable('{{%user_profile}}', [
+            'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
             'name' => $this->string(255),
             'surname' => $this->string(255),
