@@ -82,7 +82,7 @@ class Bootstrap implements BootstrapInterface {
                         'class' => Collection::className(),
                     ]);
                 }
-                $app->params['admin']['menu']['user'] = function() {
+                $app->params['admin']['menu']['user'] = function() use($module) {
                     return $module->getAdminMenu();
                 };
                 
