@@ -49,6 +49,9 @@ class AdminMenu extends \yii\bootstrap\Widget {
         $currentModule = Yii::$app->controller->module->id;
         $startPos = 999999;
         foreach(Yii::$app->params['admin']['menu'] AS $key => $list) {
+            if($list instanceof \Closure) {
+                $list = $list();
+            }
             if(!empty($list['items'])) {
                 $moduleMenuItems = $this->buildModuleMenu($key, $list['items']);
                 if(count($moduleMenuItems) > 0){
