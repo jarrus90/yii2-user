@@ -54,7 +54,7 @@ class AdminMenu extends \yii\bootstrap\Widget {
                 if(count($moduleMenuItems) > 0){
                     $menuItems[] = [
                         'label' => $list['label'],
-                        'prepend' => ISSET($list['prepend']) ? $list['prepend'] : '',
+                        'icon' => ISSET($list['icon']) ? $list['icon'] : '',
                         'active' => ( $currentModule == $key ) ? true : false,
                         'childs' => $moduleMenuItems,
                         'position' => !empty($list['position']) ? $list['position'] : $startPos++
@@ -67,7 +67,7 @@ class AdminMenu extends \yii\bootstrap\Widget {
                     $menuItems[] = [
                         'label' => $list['label'],
                         'url' => Url::toRoute($list['url']),
-                        'prepend' => ISSET($list['prepend']) ? $list['prepend'] : '',
+                        'icon' => ISSET($list['icon']) ? $list['icon'] : '',
                         'active' => ( $currentModule == $key ) ? true : false,
                         'position' => !empty($list['position']) ? $list['position'] : $startPos++
                     ];

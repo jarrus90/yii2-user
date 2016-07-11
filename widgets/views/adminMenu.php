@@ -11,7 +11,7 @@
         ?>
         <li class="<?= $isList ? 'treeview': ''; ?><?= $isActive ? ' active' : '' ?>">
             <a href="<?= $isList ? '#' : (ISSET($mainItem['url']) ? $mainItem['url'] : '#' ); ?>">
-                <?= $mainItem['prepend']; ?><span><?= $mainItem['label'] ?></span>
+                <?= $mainItem['icon']; ?><span><?= $mainItem['label'] ?></span>
                 <?php if($isList) { ?>
                     <i class="fa fa-angle-left pull-right"></i>
                 <?php } ?>
