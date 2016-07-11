@@ -88,15 +88,14 @@ class Module extends BaseModule {
         'recover/<id:\d+>/<code:[A-Za-z0-9_-]+>' => 'recovery/reset',
         'settings/<action:\w+>' => 'settings/<action>'
     ];
-    
     public $filesUploadUrl = '@web/uploads/blog';
     public $filesUploadDir = '@webroot/uploads/blog';
     public $useCommonStorage = true;
-            
+
     public function init() {
         parent::init();
-        if(!$this->get('storage', false)) {
-            if($this->useCommonStorage && ($storage = Yii::$app->get('storage', false))) {
+        if (!$this->get('storage', false)) {
+            if ($this->useCommonStorage && ($storage = Yii::$app->get('storage', false))) {
                 $this->set('storage', $storage);
             } else {
                 $this->set('storage', [
@@ -105,6 +104,28 @@ class Module extends BaseModule {
                 ]);
             }
         }
+    }
+
+    public function getAdminMenu() {
+        return [
+            'label' => Yii::t('user', 'Users'),
+            'position' => 2,
+            'icon' => '<i class="fa fa-users"></i>',
+            'items' => [
+                [
+                    'label' => Yii::t('user', 'Users'),
+                    'url' => '/user/admin/index'
+                ],
+                [
+                    'label' => Yii::t('rbac', 'Roles'),
+                    'url' => '/user/role/index'
+                ],
+                [
+                    'label' => Yii::t('rbac', 'Permissions'),
+                    'url' => '/user/permission/index'
+                ],
+            ]
+        ];
     }
 
 }

@@ -82,25 +82,9 @@ class Bootstrap implements BootstrapInterface {
                         'class' => Collection::className(),
                     ]);
                 }
-                $app->params['admin']['menu']['user'] = [
-                    'label' => Yii::t('user', 'Users'),
-                    'position' => 2,
-                    'icon' => '<i class="fa fa-users"></i>',
-                    'items' => [
-                        [
-                            'label' => Yii::t('user', 'Users'),
-                            'url' => '/user/admin/index'
-                        ],
-                        [
-                            'label' => Yii::t('rbac', 'Roles'),
-                            'url' => '/user/role/index'
-                        ],
-                        [
-                            'label' => Yii::t('rbac', 'Permissions'),
-                            'url' => '/user/permission/index'
-                        ],
-                    ]
-                ];
+                $app->params['admin']['menu']['user'] = function() {
+                    return $module->getAdminMenu();
+                };
                 
                 $app->params['admin']['menu']['logout'] = [
                     'label' => Yii::t('user', 'Logout'),
