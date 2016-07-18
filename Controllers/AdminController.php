@@ -11,23 +11,21 @@
 
 namespace jarrus90\User\Controllers;
 
+use Yii;
 use jarrus90\User\UserFinder;
 use jarrus90\User\models\Profile;
 use jarrus90\User\models\User;
 use jarrus90\User\models\UserSearch;
 use jarrus90\User\Module;
 use jarrus90\User\traits\EventTrait;
-use Yii;
-use yii\base\ExitException;
-use yii\base\Model;
 use yii\base\Module as BaseModule;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use jarrus90\Core\Web\Controllers\AdminController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * AdminController allows you to administrate users.
@@ -39,6 +37,8 @@ use yii\filters\AccessControl;
 class AdminController extends Controller {
 
     use EventTrait;
+    
+    use \jarrus90\Core\Traits\AjaxValidationTrait;
 
     /**
      * Event is triggered before creating new user.
@@ -389,22 +389,21 @@ class AdminController extends Controller {
 
         return $user;
     }
-
-    /**
-     * Performs AJAX validation.
-     *
-     * @param array|Model $model
-     *
-     * @throws ExitException
-     */
-    protected function performAjaxValidation($model) {
-        if (Yii::$app->request->isAjax && !Yii::$app->request->isPjax) {
-            if ($model->load(Yii::$app->request->post())) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                echo json_encode(ActiveForm::validate($model));
-                Yii::$app->end();
-            }
+    
+    public function actionList(){
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $list = $this->finder->profileQuery->andFilterWhere(['or',
+            ['like', Profile::tableName() . '.name', Yii::$app->request->get('name', NULL)],
+            ['like', Profile::tableName() . '.surname', Yii::$app->request->get('name', NULL)]
+        ])->asArray()->limit(100)->all();
+        $result = [];
+        foreach($list AS $item) {
+            $result[] = [
+                'id' => $item['user_id'],
+                'name' => "{$item['name']} {$item['surname']}"
+            ];
         }
+        return ['results' => $result];
     }
 
 }
