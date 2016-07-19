@@ -13,7 +13,7 @@ namespace jarrus90\User\Controllers;
 
 use yii\base\InvalidConfigException;
 use yii\base\Model;
-use jarrus90\Core\Web\Controllers\AdminController as Controller;
+use jarrus90\Admin\Web\Controllers\AdminController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;

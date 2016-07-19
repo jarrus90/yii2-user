@@ -21,7 +21,7 @@ use jarrus90\User\traits\EventTrait;
 use yii\base\Module as BaseModule;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
-use jarrus90\Core\Web\Controllers\AdminController as Controller;
+use jarrus90\Admin\Web\Controllers\AdminController as Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\AccessControl;
