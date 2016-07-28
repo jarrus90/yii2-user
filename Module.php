@@ -90,7 +90,7 @@ class Module extends BaseModule {
     ];
     public $filesUploadUrl = '@web/uploads/blog';
     public $filesUploadDir = '@webroot/uploads/blog';
-    public $useCommonStorage = true;
+    public $useCommonStorage = false;
 
     public function init() {
         parent::init();
