@@ -14,12 +14,12 @@
 ?>
 
 <?=
-$this->render('/_alert', [
+$this->render('@jarrus90/User/views/_alert', [
     'module' => Yii::$app->getModule('user'),
 ])
 ?>
 <div class="nav-tabs-custom">
-    <?= $this->render('_adminMenu') ?>
+    <?= $this->render('@jarrus90/User/views/_adminMenu') ?>
     <div class="tab-content">
         <?= $content ?>
     </div>

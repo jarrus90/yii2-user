@@ -13,8 +13,10 @@
  * @var $this yii\web\View
  */
 use yii\bootstrap\Nav;
+
 ?>
 <?=
+
 Nav::widget([
     'options' => [
         'class' => 'nav-tabs'
@@ -23,7 +25,10 @@ Nav::widget([
         [
             'label' => Yii::t('user', 'Users'),
             'url' => ['/user/admin/index'],
-            'active' => (Yii::$app->controller instanceof jarrus90\User\Controllers\AdminController),
+            'active' => (
+                !(Yii::$app->controller instanceof jarrus90\User\Controllers\RoleController) &&
+                !(Yii::$app->controller instanceof jarrus90\User\Controllers\PermissionController)
+            ),
             'visible' => Yii::$app->user->can('user_admin')
         ],
         [
