@@ -7,10 +7,9 @@
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
-
-use jarrus90\User\models\User;
-use yii\bootstrap\Nav;
 use yii\web\View;
+use yii\bootstrap\Nav;
+use jarrus90\User\models\User;
 
 /**
  * @var View 	$this
@@ -39,6 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'label' => Yii::t('user', 'Assignments'),
                             'url' => ['/user/admin/assignments', 'id' => $user->id],
+                        ],
+                        [
+                            'label' => Yii::t('user-purse', 'Purse'),
+                            'url' => ['/user/admin/assignments', 'id' => $user->id],
+                            'visible' => ISSET(Yii::$app->extensions['user-purse'])
                         ],
                         [
                             'label' => Yii::t('user', 'Confirm'),
