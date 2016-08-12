@@ -39,15 +39,15 @@ class Bootstrap implements BootstrapInterface {
             ]);
 
 
-            if (!isset($app->get('i18n')->translations['rbac*'])) {
-                $app->get('i18n')->translations['rbac*'] = [
+            if (!isset($app->get('i18n')->translations['rbac'])) {
+                $app->get('i18n')->translations['rbac'] = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => __DIR__ . '/messages',
                     'sourceLanguage' => 'en-US'
                 ];
             }
-            if (!isset($app->get('i18n')->translations['user*'])) {
-                $app->get('i18n')->translations['user*'] = [
+            if (!isset($app->get('i18n')->translations['user'])) {
+                $app->get('i18n')->translations['user'] = [
                     'class' => PhpMessageSource::className(),
                     'basePath' => __DIR__ . '/messages',
                     'sourceLanguage' => 'en-US'
