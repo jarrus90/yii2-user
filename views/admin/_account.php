@@ -8,8 +8,8 @@
  * file that was distributed with this source code.
  */
 
-use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+use kartik\form\ActiveForm;
 
 /*
  * @var yii\web\View $this
@@ -21,14 +21,10 @@ use yii\helpers\Html;
 
 <?php
 $form = ActiveForm::begin([
-            'layout' => 'horizontal',
+            'type' => ActiveForm::TYPE_HORIZONTAL,
             'enableAjaxValidation' => true,
             'enableClientValidation' => false,
-            'fieldConfig' => [
-                'horizontalCssClasses' => [
-                    'wrapper' => 'col-sm-9',
-                ],
-            ],
+            'formConfig' => ['labelSpan' => 3]
         ]);
 ?>
 

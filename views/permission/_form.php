@@ -13,9 +13,9 @@
  * @var $this  yii\web\View
  * @var $model jarrus90\User\models\Role
  */
-use kartik\select2\Select2;
-use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use kartik\select2\Select2;
+use kartik\form\ActiveForm;
 ?>
 
 <?php
@@ -23,6 +23,7 @@ use yii\helpers\Html;
 $form = ActiveForm::begin([
             'enableClientValidation' => false,
             'enableAjaxValidation' => true,
+            'type' => ActiveForm::TYPE_HORIZONTAL
         ])
 ?>
 
