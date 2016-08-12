@@ -98,10 +98,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="col-md-9">
-        <div class="box box-primary">
-            <div class="box-body">
-                <?= $content ?>
-            </div>
-        </div>
+        <?= $content ?>
     </div>
 </div>

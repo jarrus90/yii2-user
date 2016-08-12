@@ -20,27 +20,24 @@ use kartik\form\ActiveForm;
 
 <?php $this->beginContent('@jarrus90/User/views/admin/update.php', ['user' => $user]) ?>
 
-<?php
-$form = ActiveForm::begin([
-            'type' => ActiveForm::TYPE_HORIZONTAL,
-            'enableAjaxValidation' => true,
-            'enableClientValidation' => false,
-            'formConfig' => ['labelSpan' => 3]
-        ]);
-?>
-
-<?= $form->field($profile, 'name') ?>
-<?= $form->field($profile, 'name') ?>
-<?= $form->field($profile, 'public_email') ?>
-<?= $form->field($profile, 'bio')->textarea() ?>
-
-
-<div class="form-group">
-    <div class="col-lg-offset-3 col-lg-9">
+<div class="box box-primary">
+    <?php
+    $form = ActiveForm::begin([
+                'type' => ActiveForm::TYPE_HORIZONTAL,
+                'enableAjaxValidation' => true,
+                'enableClientValidation' => false,
+                'formConfig' => ['labelSpan' => 3]
+    ]);
+    ?>
+    <div class="box-body">
+        <?= $form->field($profile, 'name') ?>
+        <?= $form->field($profile, 'name') ?>
+        <?= $form->field($profile, 'public_email') ?>
+        <?= $form->field($profile, 'bio')->textarea() ?>
+    </div>
+    <div class="box-footer">
         <?= Html::submitButton(Yii::t('user', 'Update'), ['class' => 'btn btn-block btn-success']) ?>
     </div>
+    <?php ActiveForm::end(); ?>
 </div>
-
-<?php ActiveForm::end(); ?>
-
 <?php $this->endContent() ?>

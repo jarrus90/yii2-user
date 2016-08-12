@@ -19,16 +19,17 @@ use jarrus90\User\widgets\Assignments;
 
 <?php $this->beginContent('@jarrus90/User/views/admin/update.php', ['user' => $user]) ?>
 
-<?=
-
-yii\bootstrap\Alert::widget([
-    'options' => [
-        'class' => 'alert-info',
-    ],
-    'body' => Yii::t('user', 'You can assign multiple roles or permissions to user by using the form below'),
-])
-?>
-
-<?= Assignments::widget(['userId' => $user->id]) ?>
-
+<div class="box box-primary">
+    <div class="box-body">
+        <?=
+        yii\bootstrap\Alert::widget([
+            'options' => [
+                'class' => 'alert-info',
+            ],
+            'body' => Yii::t('user', 'You can assign multiple roles or permissions to user by using the form below'),
+        ])
+        ?>
+        <?= Assignments::widget(['userId' => $user->id]) ?>
+    </div>
+</div>
 <?php $this->endContent() ?>
