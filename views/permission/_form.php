@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the Dektrium project.
  *
@@ -17,33 +16,31 @@ use yii\helpers\Html;
 use kartik\select2\Select2;
 use kartik\form\ActiveForm;
 ?>
-
-<?php
-
-$form = ActiveForm::begin([
-            'enableClientValidation' => false,
-            'enableAjaxValidation' => true,
-            'type' => ActiveForm::TYPE_HORIZONTAL
+<div class="box box-primary">
+    <?php
+    $form = ActiveForm::begin([
+                'enableClientValidation' => false,
+                'enableAjaxValidation' => true,
+                'type' => ActiveForm::TYPE_HORIZONTAL,
+                'formConfig' => ['labelSpan' => 3]
+            ])
+    ?>
+    <div class="box-body">
+        <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'description') ?>
+        <?= $form->field($model, 'rule') ?>
+        <?=
+        $form->field($model, 'children')->widget(Select2::className(), [
+            'data' => $model->getUnassignedItems(),
+            'options' => [
+                'id' => 'children',
+                'multiple' => true
+            ],
         ])
-?>
-
-<?= $form->field($model, 'name') ?>
-
-<?= $form->field($model, 'description') ?>
-
-<?= $form->field($model, 'rule') ?>
-
-<?=
-
-$form->field($model, 'children')->widget(Select2::className(), [
-    'data' => $model->getUnassignedItems(),
-    'options' => [
-        'id' => 'children',
-        'multiple' => true
-    ],
-])
-?>
-
-<?= Html::submitButton(Yii::t('rbac', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
-
-<?php ActiveForm::end() ?>
+        ?>
+    </div>
+    <div class="box-footer">
+        <?= Html::submitButton(Yii::t('rbac', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
+    </div>
+    <?php ActiveForm::end() ?>
+</div>

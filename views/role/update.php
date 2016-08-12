@@ -14,16 +14,8 @@
  * @var $this  yii\web\View
  */
 $this->title = Yii::t('rbac', 'Update role');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-
-<?=
-
-$this->render('_form', [
+echo $this->render('_form', [
     'model' => $model,
-])
-?>
-
-<?php $this->endContent() ?>
+]);

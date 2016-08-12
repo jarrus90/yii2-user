@@ -14,16 +14,8 @@
  * @var $this  yii\web\View
  */
 $this->title = Yii::t('rbac', 'Create new permission');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Permissions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-
-<?=
-
-$this->render('_form', [
+echo $this->render('_form', [
     'model' => $model,
-])
-?>
-
-<?php $this->endContent() ?>
+]);

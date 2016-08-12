@@ -21,13 +21,7 @@ use yii\helpers\Url;
 
 $this->title = Yii::t('rbac', 'Permissions');
 $this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-
-<?=
-
-GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $filterModel,
     'pjax' => true,
@@ -80,12 +74,9 @@ GridView::widget([
             'urlCreator' => function ($action, $model) {
                 return Url::to(['/user/permission/' . $action, 'name' => $model['name']]);
             },
-                    'options' => [
-                        'style' => 'width: 5%'
-                    ],
-                ]
+            'options' => [
+                'style' => 'width: 5%'
             ],
-        ])
-        ?>
-
-        <?php $this->endContent() ?>
+        ]
+    ],
+]);

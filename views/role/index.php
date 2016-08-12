@@ -22,9 +22,6 @@ use yii\helpers\Url;
 $this->title = Yii::t('rbac', 'Roles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-
 <?=
 
 GridView::widget([
@@ -80,12 +77,10 @@ GridView::widget([
             'urlCreator' => function ($action, $model) {
                 return Url::to(['/user/role/' . $action, 'name' => $model['name']]);
             },
-                    'options' => [
-                        'style' => 'width: 5%'
-                    ],
-                ]
+            'options' => [
+                'style' => 'width: 5%'
             ],
-        ])
-        ?>
-
-        <?php $this->endContent() ?>
+        ]
+    ],
+])
+?>

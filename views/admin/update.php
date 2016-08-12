@@ -19,12 +19,9 @@ use jarrus90\User\models\User;
  * @var string 	$content
  */
 $this->title = Yii::t('user', 'Update user account');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['/user/admin/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-
 <div class="row">
     <div class="col-md-3">
         <div class="box box-primary">
@@ -108,5 +105,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-
-<?php $this->endContent() ?>

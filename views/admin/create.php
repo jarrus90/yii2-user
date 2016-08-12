@@ -19,8 +19,6 @@ $this->title = Yii::t('user', 'Create a user account');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
 <div class="box">
     <?php
     $form = ActiveForm::begin([
@@ -39,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
             <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
         </div>
-
         <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
     </div>
     <div class="box-footer">
@@ -51,4 +48,3 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-<?php $this->endContent() ?>

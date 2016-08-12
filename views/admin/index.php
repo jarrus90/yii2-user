@@ -23,11 +23,7 @@ use yii\helpers\Url;
  */
 $this->title = Yii::t('user', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
-?>
-
-<?php $this->beginContent('@jarrus90/User/views/_adminLayout.php') ?>
-<?=
-GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'pjax' => true,
@@ -112,4 +108,3 @@ GridView::widget([
     ],
 ]);
 ?>
-<?php $this->endContent() ?>
