@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'label' => Yii::t('user-purse', 'Purse'),
-                        'url' => Url::toRoute(['/user-purse/admin/user', 'id' => $user->id]),
+                        'url' => Url::toRoute(['/user-purse/admin/refills', 'id' => $user->id]),
                         'visible' => ISSET(Yii::$app->extensions['jarrus90/yii2-user-purse']),
                         'active' => Yii::$app->controller instanceof jarrus90\UserPurse\Controllers\AdminController
                     ],
