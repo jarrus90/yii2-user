@@ -21,7 +21,7 @@ Anyone and everyone is welcome to contribute. Please take a moment to review the
 
 ## License
 
-Yii2-user is released under the MIT License. See the bundled [LICENSE.md](LICENSE.md) for details.
+Yii2-user is released under the BSD-3-Clause License. See the bundled [LICENSE.md](LICENSE.md) for details.
 
 ### Thanks to
 
