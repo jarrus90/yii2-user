@@ -23,6 +23,24 @@ Anyone and everyone is welcome to contribute. Please take a moment to review the
 
 Yii2-user is released under the BSD-3-Clause License. See the bundled [LICENSE.md](LICENSE.md) for details.
 
+##Requirements
+
+YII 2.0
+
+##Usage
+
+1) Install with Composer
+
+~~~php
+
+"require": {
+    "jarrus90/yii2-user": "1.*",
+},
+
+php composer.phar update
+
+~~~
+
 ### Thanks to
 
 [dektrium/yii2-user](https://github.com/dektrium/yii2-user) and [dektrium/yii2-rbac](https://github.com/dektrium/yii2-rbac)
