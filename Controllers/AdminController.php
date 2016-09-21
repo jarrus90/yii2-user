@@ -12,20 +12,19 @@
 namespace jarrus90\User\Controllers;
 
 use Yii;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\base\Module as BaseModule;
+use yii\helpers\Url;
+use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use jarrus90\User\UserFinder;
 use jarrus90\User\models\Profile;
 use jarrus90\User\models\User;
 use jarrus90\User\models\UserSearch;
 use jarrus90\User\Module;
 use jarrus90\User\traits\EventTrait;
-use yii\base\Module as BaseModule;
-use yii\filters\VerbFilter;
-use yii\helpers\Url;
-use jarrus90\Admin\Web\Controllers\AdminController as Controller;
-use yii\web\NotFoundHttpException;
-use yii\web\Response;
-use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
+use jarrus90\Core\Web\Controllers\AdminController as Controller;
 
 /**
  * AdminController allows you to administrate users.

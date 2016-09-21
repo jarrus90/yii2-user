@@ -25,7 +25,6 @@
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-widget-select2": "*",
         "jarrus90/yii2-core": "*",
-        "jarrus90/yii2-admin": "*",
         "jarrus90/yii2-multilang": "*"
     },
     "require-dev": {
