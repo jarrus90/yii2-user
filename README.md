@@ -1,5 +1,7 @@
 # Yii2-user
 
+[![Build Status](https://travis-ci.org/jarrus90/yii2-user.svg?branch=master)](https://travis-ci.org/jarrus90/yii2-user)
+
 Most of web applications provide a way for users to register, log in or reset
 their forgotten passwords. Rather than re-implementing this on each application,
 you can use Yii2-user which is a flexible user management module for Yii2 that
