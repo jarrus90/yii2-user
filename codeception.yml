@@ -17,8 +17,12 @@ coverage:
     include:
             - ../Components/*
             - ../Controllers/*
-            - ../Models/*
-            - ../Widgets/*
-            - ../views/*
+            - ../clients/*
+            - ../events/*
+            - ../helpers/*
+            - ../models/*
+            - ../traits/*
+            - ../validators/*
+            - ../widgets/*
             - ../Bootstrap.php
             - ../Module.php

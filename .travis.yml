@@ -26,8 +26,8 @@ install:
   - travis_retry composer install --prefer-dist
 
 before_script:
-  - mysql -e 'create database multilang_test;'
-  - php tests/_app/yii.php migrate --migrationPath=@jarrus90/User/migrations --interactive=0
+  - mysql -e 'create database user_test;'
+  - php tests/_app/yii.php migrate --interactive=0
   - ~/.composer/vendor/bin/codecept build
 
 script: ~/.composer/vendor/bin/codecept run
