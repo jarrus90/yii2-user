@@ -1,5 +1,7 @@
 <?php
 
+namespace jarrus90\User\migrations;
+
 use yii\db\Migration;
 
 class m160706_075916_user_add_lang extends Migration {

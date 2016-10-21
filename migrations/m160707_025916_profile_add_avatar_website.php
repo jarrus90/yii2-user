@@ -1,5 +1,7 @@
 <?php
 
+namespace jarrus90\User\migrations;
+
 use yii\db\Migration;
 
 class m160707_025916_profile_add_avatar_website extends Migration {

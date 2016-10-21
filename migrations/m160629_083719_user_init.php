@@ -1,5 +1,7 @@
 <?php
+namespace jarrus90\User\migrations;
 
+use Yii;
 use yii\db\Migration;
 
 class m160629_083719_user_init extends Migration {

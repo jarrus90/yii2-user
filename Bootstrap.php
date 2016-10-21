@@ -91,6 +91,11 @@ class Bootstrap implements BootstrapInterface {
                     'prepend' => '<i class="fa fa-sign-out"></i>',
                     'url' => '/user/security/logout'
                 ];
+            } else {
+                if(empty($app->controllerMap['migrate'])) {
+                    $app->controllerMap['migrate']['class'] = 'yii\console\controllers\MigrateController';
+                }
+                $app->controllerMap['migrate']['migrationNamespaces'][] = 'jarrus90\User\migrations';
             }
             if (!$app->authManager instanceof DbManager) {
                 $app->set('authManager', [
@@ -98,7 +103,6 @@ class Bootstrap implements BootstrapInterface {
                     'cache' => $app->cache
                 ]);
             }
-            $app->params['yii.migrations'][] = '@jarrus90/User/migrations/';
             Yii::$container->set('jarrus90\User\Mailer', $module->mailer);
         }
     }
