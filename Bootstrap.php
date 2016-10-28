@@ -88,7 +88,7 @@ class Bootstrap implements BootstrapInterface {
                 
                 $app->params['admin']['menu']['logout'] = [
                     'label' => Yii::t('user', 'Logout'),
-                    'prepend' => '<i class="fa fa-sign-out"></i>',
+                    'icon' => '<i class="fa fa-sign-out"></i>',
                     'url' => '/user/security/logout'
                 ];
             } else {
