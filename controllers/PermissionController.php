@@ -9,21 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace jarrus90\User\Controllers;
+namespace jarrus90\User\controllers;
 
-use yii\rbac\Role;
-use yii\rbac\Item;
+use yii\rbac\Permission;
 use yii\web\NotFoundHttpException;
+use yii\rbac\Item;
 use yii\filters\AccessControl;
 
 /**
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class RoleController extends ItemControllerAbstract {
+class PermissionController extends ItemControllerAbstract {
 
     /** @var string */
-    protected $modelClass = 'jarrus90\User\models\Role';
-    protected $type = Item::TYPE_ROLE;
+    protected $modelClass = 'jarrus90\User\models\Permission';
+
+    /** @var int */
+    protected $type = Item::TYPE_PERMISSION;
 
     /** @inheritdoc */
     public function behaviors() {
@@ -42,9 +44,9 @@ class RoleController extends ItemControllerAbstract {
 
     /** @inheritdoc */
     protected function getItem($name) {
-        $role = \Yii::$app->authManager->getRole($name);
+        $role = \Yii::$app->authManager->getPermission($name);
 
-        if ($role instanceof Role) {
+        if ($role instanceof Permission) {
             return $role;
         }
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace jarrus90\User\Controllers;
+namespace jarrus90\User\controllers;
 
 use yii\base\Model;
 use yii\base\InvalidConfigException;

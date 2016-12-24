@@ -55,7 +55,6 @@ class Bootstrap implements BootstrapInterface {
             }
             
             if (!$app instanceof ConsoleApplication) {
-                $module->controllerNamespace = 'jarrus90\User\Controllers';
                 if(!Yii::$container->has('yii\web\User')) {
                     Yii::$container->set('yii\web\User', [
                         'enableAutoLogin' => true,

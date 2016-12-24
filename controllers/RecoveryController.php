@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace jarrus90\User\Controllers;
+namespace jarrus90\User\controllers;
 
 use jarrus90\User\UserFinder;
 use jarrus90\User\models\RecoveryForm;
