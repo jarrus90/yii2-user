@@ -85,11 +85,13 @@ class Bootstrap implements BootstrapInterface {
                     return $module->getAdminMenu();
                 };
                 
-                $app->params['admin']['menu']['logout'] = [
-                    'label' => Yii::t('user', 'Logout'),
-                    'icon' => '<i class="fa fa-sign-out"></i>',
-                    'url' => '/user/security/logout'
-                ];
+                $app->params['admin']['menu']['logout'] = function() {
+                    return [
+                        'label' => Yii::t('user', 'Logout'),
+                        'icon' => '<i class="fa fa-sign-out"></i>',
+                        'url' => '/user/security/logout'
+                    ];
+                };
             } else {
                 if(empty($app->controllerMap['migrate'])) {
                     $app->controllerMap['migrate']['class'] = 'yii\console\controllers\MigrateController';
