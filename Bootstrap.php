@@ -84,7 +84,15 @@ class Bootstrap implements BootstrapInterface {
                 $app->params['admin']['menu']['user'] = function() use($module) {
                     return $module->getAdminMenu();
                 };
-                
+
+                $app->params['admin']['menu']['login'] = function() {
+                    return [
+                        'label' => Yii::t('user', 'Log in'),
+                        'icon' => '<i class="fa fa-sign-out"></i>',
+                        'url' => '/user/security/login'
+                    ];
+                };
+
                 $app->params['admin']['menu']['logout'] = function() {
                     return [
                         'label' => Yii::t('user', 'Logout'),
