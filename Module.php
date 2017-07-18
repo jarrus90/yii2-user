@@ -142,7 +142,7 @@ class Module extends BaseModule {
     public function getAdminLoginMenu() {
         return function() {
             return [
-                'label' => Yii::t('user', 'Log in'),
+                'label' => Yii::t('user', 'Sign in'),
                 'icon' => '<i class="fa fa-sign-out"></i>',
                 'url' => '/user/security/login'
             ];
