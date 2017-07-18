@@ -107,34 +107,56 @@ class Module extends BaseModule {
     }
 
     public function getAdminMenu() {
-        return [
-            'label' => Yii::t('user', 'Users'),
-            'position' => 2,
-            'icon' => '<i class="fa fa-users"></i>',
-            'items' => [
-                [
-                    'label' => Yii::t('user', 'Users'),
-                    'url' => '/user/admin/index',
-                    'active' => function(){
-                        return (Yii::$app->controller->id == 'admin' && Yii::$app->controller->module->id == 'user');
-                    }
-                ],
-                [
-                    'label' => Yii::t('rbac', 'Roles'),
-                    'url' => '/user/role/index',
-                    'active' => function(){
-                        return (Yii::$app->controller->id == 'role' && Yii::$app->controller->module->id == 'user');
-                    }
-                ],
-                [
-                    'label' => Yii::t('rbac', 'Permissions'),
-                    'url' => '/user/permission/index',
-                    'active' => function(){
-                        return (Yii::$app->controller->id == 'permission' && Yii::$app->controller->module->id == 'user');
-                    }
-                ],
-            ]
-        ];
+        return function() {
+            return [
+                'label' => Yii::t('user', 'Users'),
+                'position' => 2,
+                'icon' => '<i class="fa fa-users"></i>',
+                'items' => [
+                    [
+                        'label' => Yii::t('user', 'Users'),
+                        'url' => '/user/admin/index',
+                        'active' => function() {
+                            return (Yii::$app->controller->id == 'admin' && Yii::$app->controller->module->id == 'user');
+                        }
+                    ],
+                    [
+                        'label' => Yii::t('rbac', 'Roles'),
+                        'url' => '/user/role/index',
+                        'active' => function() {
+                            return (Yii::$app->controller->id == 'role' && Yii::$app->controller->module->id == 'user');
+                        }
+                    ],
+                    [
+                        'label' => Yii::t('rbac', 'Permissions'),
+                        'url' => '/user/permission/index',
+                        'active' => function() {
+                            return (Yii::$app->controller->id == 'permission' && Yii::$app->controller->module->id == 'user');
+                        }
+                    ],
+                ]
+            ];
+        };
+    }
+
+    public function getAdminLoginMenu() {
+        return function() {
+            return [
+                'label' => Yii::t('user', 'Log in'),
+                'icon' => '<i class="fa fa-sign-out"></i>',
+                'url' => '/user/security/login'
+            ];
+        };
+    }
+
+    public function getAdminLogoutMenu() {
+        return function() {
+            return [
+                'label' => Yii::t('user', 'Logout'),
+                'icon' => '<i class="fa fa-sign-out"></i>',
+                'url' => '/user/security/logout'
+            ];
+        };
     }
 
 }
