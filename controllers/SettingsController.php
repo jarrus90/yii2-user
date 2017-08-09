@@ -20,7 +20,6 @@ use jarrus90\User\traits\EventTrait;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use jarrus90\Core\Web\Controllers\FrontController as Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -31,11 +30,11 @@ use yii\web\NotFoundHttpException;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class SettingsController extends Controller {
+class SettingsController extends \yii\web\Controller {
 
     use AjaxValidationTrait;
 
-use EventTrait;
+    use EventTrait;
 
     /**
      * Event is triggered before updating user's profile.

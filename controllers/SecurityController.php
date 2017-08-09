@@ -22,7 +22,6 @@ use Yii;
 use yii\authclient\ClientInterface;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use jarrus90\Core\Web\Controllers\FrontController as Controller;
 use yii\web\Response;
 
 /**
@@ -32,11 +31,11 @@ use yii\web\Response;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class SecurityController extends Controller {
+class SecurityController extends \yii\web\Controller {
 
     use AjaxValidationTrait;
 
-use EventTrait;
+    use EventTrait;
 
     /**
      * Event is triggered before logging user in.

@@ -22,7 +22,6 @@ use jarrus90\Core\Traits\AjaxValidationTrait;
 use jarrus90\User\traits\EventTrait;
 use Yii;
 use yii\filters\AccessControl;
-use jarrus90\Core\Web\Controllers\FrontController as Controller;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -33,11 +32,11 @@ use yii\web\NotFoundHttpException;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class RegistrationController extends Controller {
+class RegistrationController extends \yii\web\Controller {
 
     use AjaxValidationTrait;
 
-use EventTrait;
+    use EventTrait;
 
     /**
      * Event is triggered after creating RegistrationForm class.
