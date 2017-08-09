@@ -14,7 +14,6 @@ namespace jarrus90\User\controllers;
 use jarrus90\User\UserFinder;
 use Yii;
 use yii\filters\AccessControl;
-use jarrus90\Core\Web\Controllers\FrontController as Controller;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -24,7 +23,7 @@ use yii\web\NotFoundHttpException;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class ProfileController extends Controller {
+class ProfileController extends \yii\web\Controller {
 
     /** @var Finder */
     protected $finder;
