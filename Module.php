@@ -115,19 +115,19 @@ class Module extends BaseModule {
                 'items' => [
                     [
                         'label' => Yii::t('user', 'Users'),
-                        'url' => '/user/admin/index',
+                        'url' => ['/user/admin/index'],
                         'visible' => Yii::$app->user->can('user_admin'),
                         'active' => (Yii::$app->controller->id == 'admin' && Yii::$app->controller->module->id == 'user')
                     ],
                     [
                         'label' => Yii::t('rbac', 'Roles'),
-                        'url' => '/user/role/index',
+                        'url' => ['/user/role/index'],
                         'visible' => Yii::$app->user->can('admin_super'),
                         'active' => (Yii::$app->controller->id == 'role' && Yii::$app->controller->module->id == 'user')
                     ],
                     [
                         'label' => Yii::t('rbac', 'Permissions'),
-                        'url' => '/user/permission/index',
+                        'url' => ['/user/permission/index'],
                         'visible' => Yii::$app->user->can('admin_super'),
                         'active' => (Yii::$app->controller->id == 'permission' && Yii::$app->controller->module->id == 'user')
                     ],
@@ -138,14 +138,14 @@ class Module extends BaseModule {
                 'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Sign in'),
                 'visible' => Yii::$app->user->isGuest,
                 'position' => 100,
-                'url' => '/user/security/login'
+                'url' => ['/user/security/login']
             ],
             'logout' => [
                 'encode' => false,
                 'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Logout'),
                 'visible' => !Yii::$app->user->isGuest,
                 'position' => 100,
-                'url' => '/user/security/logout'
+                'url' => ['/user/security/logout']
             ]
         ];
     }
