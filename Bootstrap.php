@@ -81,12 +81,6 @@ class Bootstrap implements BootstrapInterface {
                         'class' => Collection::className(),
                     ]);
                 }
-                if(!Yii::$app->user->isGuest) {
-                    $app->params['admin']['menu']['user'] = $module->getAdminMenu();
-                    $app->params['admin']['menu']['logout'] = $module->getAdminLogoutMenu();
-                } else {
-                    $app->params['admin']['menu']['login'] = $module->getAdminLoginMenu();
-                }
             } else {
                 if(empty($app->controllerMap['migrate'])) {
                     $app->controllerMap['migrate']['class'] = 'yii\console\controllers\MigrateController';

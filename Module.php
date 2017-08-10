@@ -107,56 +107,47 @@ class Module extends BaseModule {
     }
 
     public function getAdminMenu() {
-        return function() {
-            return [
-                'label' => Yii::t('user', 'Users'),
+        return [
+            'user' => [
+                'encode' => false,
+                'label' => '<i class="fa fa-users"></i>' . Yii::t('user', 'Users'),
                 'position' => 2,
-                'icon' => '<i class="fa fa-users"></i>',
                 'items' => [
                     [
                         'label' => Yii::t('user', 'Users'),
                         'url' => '/user/admin/index',
-                        'active' => function() {
-                            return (Yii::$app->controller->id == 'admin' && Yii::$app->controller->module->id == 'user');
-                        }
+                        'visible' => Yii::$app->user->can('user_admin'),
+                        'active' => (Yii::$app->controller->id == 'admin' && Yii::$app->controller->module->id == 'user')
                     ],
                     [
                         'label' => Yii::t('rbac', 'Roles'),
                         'url' => '/user/role/index',
-                        'active' => function() {
-                            return (Yii::$app->controller->id == 'role' && Yii::$app->controller->module->id == 'user');
-                        }
+                        'visible' => Yii::$app->user->can('admin_super'),
+                        'active' => (Yii::$app->controller->id == 'role' && Yii::$app->controller->module->id == 'user')
                     ],
                     [
                         'label' => Yii::t('rbac', 'Permissions'),
                         'url' => '/user/permission/index',
-                        'active' => function() {
-                            return (Yii::$app->controller->id == 'permission' && Yii::$app->controller->module->id == 'user');
-                        }
+                        'visible' => Yii::$app->user->can('admin_super'),
+                        'active' => (Yii::$app->controller->id == 'permission' && Yii::$app->controller->module->id == 'user')
                     ],
                 ]
-            ];
-        };
-    }
-
-    public function getAdminLoginMenu() {
-        return function() {
-            return [
-                'label' => Yii::t('user', 'Sign in'),
-                'icon' => '<i class="fa fa-sign-out"></i>',
+            ],
+            'login' => [
+                'encode' => false,
+                'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Sign in'),
+                'visible' => Yii::$app->user->isGuest,
+                'position' => 100,
                 'url' => '/user/security/login'
-            ];
-        };
-    }
-
-    public function getAdminLogoutMenu() {
-        return function() {
-            return [
-                'label' => Yii::t('user', 'Logout'),
-                'icon' => '<i class="fa fa-sign-out"></i>',
+            ],
+            'logout' => [
+                'encode' => false,
+                'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Logout'),
+                'visible' => !Yii::$app->user->isGuest,
+                'position' => 100,
                 'url' => '/user/security/logout'
-            ];
-        };
+            ]
+        ];
     }
-
+    
 }
