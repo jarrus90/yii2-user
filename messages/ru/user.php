@@ -123,6 +123,7 @@ return [
     'Save' => 'Сохранить',
     'Sign in' => 'Авторизоваться',
     'Sign up' => 'Зарегистрироваться',
+    'Sign out' => 'Выйти',
     'Something went wrong and your account has not been confirmed.' => 'Что-то пошло не так, и ваш аккаунт не был активирован.',
     'Thank you for signing up on {0}' => 'Спасибо за регистрацию на сайте {0}',
     'Thank you, registration is now complete.' => 'Ваш аккаунт был успешно активирован.',

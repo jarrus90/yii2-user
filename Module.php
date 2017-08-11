@@ -109,8 +109,8 @@ class Module extends BaseModule {
     public function getAdminMenu() {
         return [
             'user' => [
-                'encode' => false,
-                'label' => '<i class="fa fa-users"></i>' . Yii::t('user', 'Users'),
+                'label' => Yii::t('user', 'Users'),
+                'icon' => '<i class="fa fa-users"></i>',
                 'position' => 2,
                 'items' => [
                     [
@@ -134,15 +134,15 @@ class Module extends BaseModule {
                 ]
             ],
             'login' => [
-                'encode' => false,
-                'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Sign in'),
+                'icon' => '<i class="fa fa-sign-out"></i>',
+                'label' => Yii::t('user', 'Sign in'),
                 'visible' => Yii::$app->user->isGuest,
                 'position' => 100,
                 'url' => ['/user/security/login']
             ],
             'logout' => [
-                'encode' => false,
-                'label' => '<i class="fa fa-sign-out"></i>' . Yii::t('user', 'Logout'),
+                'icon' => '<i class="fa fa-sign-out"></i>',
+                'label' => Yii::t('user', 'Sign out'),
                 'visible' => !Yii::$app->user->isGuest,
                 'position' => 100,
                 'url' => ['/user/security/logout']
