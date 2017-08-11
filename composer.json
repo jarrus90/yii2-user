@@ -43,10 +43,12 @@
         "bootstrap": "jarrus90\\User\\Bootstrap",
         "branch-alias": {
             "dev-master": "1.0.x-dev"
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
