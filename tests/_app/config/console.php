@@ -5,7 +5,7 @@ return \yii\helpers\ArrayHelper::merge(require_once __DIR__ . '/common.php', [
     'aliases' => [],
     'controllerMap' => [
         'migrate' => [
-            'class' => 'jarrus90\Core\Console\MigrateController',
+            'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => '@baseApp/migrations'
         ],
     ],
