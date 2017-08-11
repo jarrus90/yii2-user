@@ -22,7 +22,7 @@ cache:
 install:
   - travis_retry composer self-update
   - travis_retry composer global require "codeception/codeception:2.2.x@dev"
-  - travis_retry composer global require "fxp/composer-asset-plugin:~1.*"
+  - travis_retry composer global require "fxp/composer-asset-plugin:~1.3"
   - travis_retry composer install --prefer-dist
 
 before_script:
