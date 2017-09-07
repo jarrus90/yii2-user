@@ -50,6 +50,24 @@ class Module extends BaseModule {
     /** @var bool Whether to enable password recovery. */
     public $enablePasswordRecovery = true;
 
+    /** @var bool Whether to enable gravatar. */
+    public $avatarGravatarEnable = true;
+
+    /** @var string Default gravatar. */
+    public $avatarGravatarDefault = 'mm';
+
+    /** @var string Default gravatar rating. */
+    public $avatarGravatarRating = 'g';
+    
+    /** @var string Default gravatar rating. */
+    public $avatarGravatarDefaultSize = 200;
+
+    /** @var string Default avatar save path. */
+    public $avatarPathDefault;
+
+    /** @var string Default avatar view url. */
+    public $avatarUrlDefault;
+
     /** @var int Email changing strategy. */
     public $emailChangeStrategy = self::STRATEGY_SECURE;
 

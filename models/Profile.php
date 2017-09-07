@@ -11,8 +11,9 @@
 
 namespace jarrus90\User\models;
 
-use jarrus90\User\traits\ModuleTrait;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
+use jarrus90\User\traits\ModuleTrait;
 
 /**
  * This is the model class for table "profile".
@@ -64,6 +65,7 @@ class Profile extends ActiveRecord {
     public function attributeLabels() {
         return [
             'name' => \Yii::t('user', 'Name'),
+            'surname' => \Yii::t('user', 'Surname'),
             'public_email' => \Yii::t('user', 'Email (public)'),
             'bio' => \Yii::t('user', 'Bio'),
             'timezone' => \Yii::t('user', 'Time zone'),
@@ -117,8 +119,28 @@ class Profile extends ActiveRecord {
         return $dateTime->setTimezone($this->getTimeZone());
     }
 
-    public function getAvatarUrl() {
-        return 'http://icons.iconarchive.com/icons/guillendesign/variations-3/256/Default-Icon-icon.png';
+    public function getAvatarUrl($size = false, $forceGravatar = false, $default = false, $url = false) {
+        if(!$forceGravatar && !empty($this->avatar)) {
+            return ($url ? : $this->module->avatarUrlDefault) . $this->avatar;
+        } else if($forceGravatar || $this->module->avatarGravatarEnable) {
+            return "//www.gravatar.com/avatar/{$this->gravatar_id}?" . http_build_query([
+                's' => ($size ? : $this->module->avatarGravatarDefaultSize),
+                'd' => ($default ? : $this->module->avatarGravatarDefault),
+                'r' => $this->module->avatarGravatarRating,
+            ]);
+        }
+        return false;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert) {
+        if ($this->isAttributeChanged('public_email')) {
+            $this->setAttribute('gravatar_id', md5(strtolower(trim($this->getAttribute('public_email')))));
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**

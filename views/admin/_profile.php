@@ -31,7 +31,7 @@ use kartik\form\ActiveForm;
     ?>
     <div class="box-body">
         <?= $form->field($profile, 'name') ?>
-        <?= $form->field($profile, 'name') ?>
+        <?= $form->field($profile, 'surname') ?>
         <?= $form->field($profile, 'public_email') ?>
         <?= $form->field($profile, 'bio')->textarea() ?>
     </div>

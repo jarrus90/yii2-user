@@ -435,6 +435,10 @@ class User extends ActiveRecord implements IdentityInterface {
             }
             $this->_profile->link('user', $this);
         }
+        if($insert || empty($this->profile->public_email) || ($this->profile->public_email == $this->email)) {
+            $this->profile->setAttribute('public_email', $this->email);
+            $this->profile->save();
+        }
     }
 
     /** @inheritdoc */
