@@ -96,6 +96,9 @@ class Module extends BaseModule {
      */
     public $urlPrefix = 'user';
 
+    /** @var array Model map */
+    public $modelMap = [];
+
     /** @var array The rules to be used in URL management. */
     public $urlRules = [
         '<id:\d+>' => 'profile/show',
