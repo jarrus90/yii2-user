@@ -129,7 +129,7 @@ class Module extends BaseModule {
             }
         }
         if (($user = Yii::$app->get('user', false))) {
-            $user->on(Yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
+            $user->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
                 /** @var $event \yii\web\UserEvent */
                 $event->identity->updateAttributes(['last_login' => time()]);
             });
