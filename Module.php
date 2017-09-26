@@ -33,6 +33,9 @@ class Module extends BaseModule {
     const STRATEGY_SECURE = 2;
 
     /** @var bool Whether to show flash messages. */
+    public $enableLastLogin = true;
+
+    /** @var bool Whether to show flash messages. */
     public $enableFlashMessages = true;
 
     /** @var bool Whether to enable registration. */
@@ -124,6 +127,12 @@ class Module extends BaseModule {
                     'path' => $this->filesUploadDir
                 ]);
             }
+        }
+        if (($user = Yii::$app->get('user', false))) {
+            $user->on(Yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
+                /** @var $event \yii\web\UserEvent */
+                $event->identity->updateAttributes(['last_login' => time()]);
+            });
         }
     }
 
