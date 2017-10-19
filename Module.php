@@ -140,7 +140,7 @@ class Module extends BaseModule {
         return [
             'user' => [
                 'label' => Yii::t('user', 'Users'),
-                'icon' => '<i class="fa fa-users"></i>',
+                'icon' => 'fa fa-users',
                 'position' => 2,
                 'items' => [
                     [
@@ -164,14 +164,14 @@ class Module extends BaseModule {
                 ]
             ],
             'login' => [
-                'icon' => '<i class="fa fa-sign-out"></i>',
+                'icon' => 'fa fa-sign-in',
                 'label' => Yii::t('user', 'Sign in'),
                 'visible' => Yii::$app->user->isGuest,
                 'position' => 100,
                 'url' => ['/user/security/login']
             ],
             'logout' => [
-                'icon' => '<i class="fa fa-sign-out"></i>',
+                'icon' => 'fa fa-sign-out',
                 'label' => Yii::t('user', 'Sign out'),
                 'visible' => !Yii::$app->user->isGuest,
                 'position' => 100,
