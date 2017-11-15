@@ -13,6 +13,8 @@ namespace jarrus90\User;
 
 use Yii;
 use yii\base\Module as BaseModule;
+use yii\base\Event;
+use yii\web\User;
 
 /**
  * This is the main module class for the Yii2-user.
@@ -128,12 +130,10 @@ class Module extends BaseModule {
                 ]);
             }
         }
-        if (($user = Yii::$app->get('user', false))) {
-            $user->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
-                /** @var $event \yii\web\UserEvent */
-                $event->identity->updateAttributes(['last_login' => time()]);
-            });
-        }
+        Event::on(User::className(), User::EVENT_AFTER_LOGIN, function ($event) {
+            /** @var $event \yii\web\UserEvent */
+            $event->identity->updateAttributes(['last_login' => time()]);
+        });
     }
 
     public function getAdminMenu() {
