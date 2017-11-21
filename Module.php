@@ -118,6 +118,8 @@ class Module extends BaseModule {
     public $filesUploadDir = '@webroot/uploads/blog';
     public $useCommonStorage = false;
 
+    public $afterLoginTimeUpdateEnabled = true;
+
     public function init() {
         parent::init();
         if (!$this->get('storage', false)) {
@@ -130,10 +132,12 @@ class Module extends BaseModule {
                 ]);
             }
         }
-        Event::on(User::className(), User::EVENT_AFTER_LOGIN, function ($event) {
-            /** @var $event \yii\web\UserEvent */
-            $event->identity->updateAttributes(['last_login' => time()]);
-        });
+        if($this->afterLoginTimeUpdateEnabled) {
+            Event::on(User::className(), User::EVENT_AFTER_LOGIN, function ($event) {
+                /** @var $event \yii\web\UserEvent */
+                $event->identity->updateAttributes(['last_login' => time()]);
+            });
+        }
     }
 
     public function getAdminMenu() {
