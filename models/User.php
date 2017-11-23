@@ -266,6 +266,9 @@ class User extends ActiveRecord implements IdentityInterface {
             $token = Yii::createObject(['class' => Token::className(), 'type' => Token::TYPE_CONFIRMATION]);
             $token->link('user', $this);
         }
+        if ($this->module->enableUnconfirmedLogin) {
+            Yii::$app->user->login($this);
+        }
 
         $this->mailer->sendWelcomeMessage($this, isset($token) ? $token : null);
         $this->trigger(self::AFTER_REGISTER);
